@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository> implements UserDetailsService {
 
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
