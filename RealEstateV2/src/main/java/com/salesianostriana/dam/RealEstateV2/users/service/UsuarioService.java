@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service("userDetailsService")
 @RequiredArgsConstructor
@@ -71,6 +73,17 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
             return save(usuario);
         }else{
             return null;
+        }
+    }
+
+    public List<Usuario> findAllPropietarios() {
+        if(repositorio.findAll().isEmpty()){
+            return null;
+        }else {
+            return repositorio.findAll()
+                    .stream()
+                    .filter(usuario -> usuario.getRol().name().contentEquals("PROPIETARIO"))
+                    .collect(Collectors.toList());
         }
     }
 
