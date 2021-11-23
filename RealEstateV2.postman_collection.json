@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0433f6e4-12a3-488c-a686-6fa1939e0de8",
+		"_postman_id": "a951d205-36a3-4c9c-a2e2-3156f06c24d2",
 		"name": "RealEstateV2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -45,7 +45,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"pep@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"email\": \"sergio@admin.com\",\r\n    \"password\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -70,6 +70,16 @@
 				{
 					"name": "Identificar usuario logueado",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5NDdiMTI0YS0zZDU4LTQ1NTgtYmNhOC03NWU4MjE4ZjhkNWEiLCJpYXQiOjE2Mzc3NTg5MjIsIm5vbWJyZSI6IlNlcmdpbyIsImFwZWxsaWRvcyI6IkNoYW1vcnJvIEdhcmNpYSIsInJvbCI6IkFETUlOIn0.J3SvPnJj1KaYP7BHAxWAg2W8JvWpeShs_L0VFbvaiNg",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -82,6 +92,51 @@
 							"path": [
 								"auth",
 								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gestores",
+			"item": [
+				{
+					"name": "Nuevo gestor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5NDdiMTI0YS0zZDU4LTQ1NTgtYmNhOC03NWU4MjE4ZjhkNWEiLCJpYXQiOjE2Mzc3NjAwNjksIm5vbWJyZSI6IlNlcmdpbyIsImFwZWxsaWRvcyI6IkNoYW1vcnJvIEdhcmNpYSIsInJvbCI6IkFETUlOIn0.GBSp2B8mzRRZWVNUjEHdln79wCGa6VcRK9QmzURDdzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Juan\",\r\n    \"apellidos\": \"Del Pino Monteño\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"juan@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register/gestor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register",
+								"gestor"
 							]
 						}
 					},

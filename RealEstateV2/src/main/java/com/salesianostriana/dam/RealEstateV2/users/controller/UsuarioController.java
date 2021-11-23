@@ -21,8 +21,19 @@ public class UsuarioController {
     private final UsuarioDtoConverter usuarioDtoConverter;
 
     @PostMapping("/register/user")
-    public ResponseEntity<GetUsuarioDto> nuevoUsuario(@RequestBody CreateUsuarioDto nuevoUsuario){
-        Usuario guardado = usuarioService.savePropietario(nuevoUsuario);
+    public ResponseEntity<GetUsuarioDto> nuevoPropietario(@RequestBody CreateUsuarioDto nuevoPropietario){
+        Usuario guardado = usuarioService.savePropietario(nuevoPropietario);
+
+        if(guardado == null){
+            return ResponseEntity.badRequest().build();
+        }else{
+            return ResponseEntity.ok(usuarioDtoConverter.convertUsuarioToUsuarioDto(guardado));
+        }
+    }
+
+    @PostMapping("/register/gestor")
+    public ResponseEntity<GetUsuarioDto> nuevoGestor(@RequestBody CreateUsuarioDto nuevoGestor){
+        Usuario guardado = usuarioService.saveGestor(nuevoGestor);
 
         if(guardado == null){
             return ResponseEntity.badRequest().build();
