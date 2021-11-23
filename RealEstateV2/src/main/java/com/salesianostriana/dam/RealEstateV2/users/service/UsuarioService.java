@@ -26,14 +26,14 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
                 .orElseThrow(() -> new UsernameNotFoundException(email + " no encontrado."));
     }
 
-    public Usuario save(CreateUsuarioDto nuevoUsuario) {
-        if(nuevoUsuario.getPassword().contentEquals(nuevoUsuario.getPassword2())){
+    public Usuario savePropietario(CreateUsuarioDto nuevoPropietario) {
+        if(nuevoPropietario.getPassword().contentEquals(nuevoPropietario.getPassword2())){
             Usuario usuario = Usuario.builder()
-                    .password(passwordEncoder.encode(nuevoUsuario.getPassword()))
-                    .apellidos(nuevoUsuario.getApellidos())
-                    .avatar(nuevoUsuario.getAvatar())
-                    .email(nuevoUsuario.getEmail())
-                    .nombre(nuevoUsuario.getNombre())
+                    .password(passwordEncoder.encode(nuevoPropietario.getPassword()))
+                    .apellidos(nuevoPropietario.getApellidos())
+                    .avatar(nuevoPropietario.getAvatar())
+                    .email(nuevoPropietario.getEmail())
+                    .nombre(nuevoPropietario.getNombre())
                     .rol(UserRole.PROPIETARIO)
                     .build();
             return save(usuario);

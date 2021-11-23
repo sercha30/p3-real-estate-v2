@@ -2,6 +2,7 @@ package com.salesianostriana.dam.RealEstateV2.security;
 
 import com.salesianostriana.dam.RealEstateV2.security.jwt.JwtAccessDeniedHandler;
 import com.salesianostriana.dam.RealEstateV2.security.jwt.JwtAuthenticationEntryPoint;
+import com.salesianostriana.dam.RealEstateV2.security.jwt.JwtAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 @Configuration
@@ -24,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final JwtAuthorizationFilter filter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -49,8 +52,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests()
                         .antMatchers(HttpMethod.POST,"/auth/**").anonymous()
+                        .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated();
 
+        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+
+        http.headers().frameOptions().disable();
 
     }
 }
