@@ -42,4 +42,20 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
         }
     }
 
+    public Usuario saveGestor(CreateUsuarioDto nuevoGestor) {
+        if(nuevoGestor.getPassword().contentEquals(nuevoGestor.getPassword2())){
+            Usuario usuario = Usuario.builder()
+                    .password(passwordEncoder.encode(nuevoGestor.getPassword()))
+                    .apellidos(nuevoGestor.getApellidos())
+                    .avatar(nuevoGestor.getAvatar())
+                    .email(nuevoGestor.getEmail())
+                    .nombre(nuevoGestor.getNombre())
+                    .rol(UserRole.GESTOR)
+                    .build();
+            return save(usuario);
+        }else{
+            return null;
+        }
+    }
+
 }
