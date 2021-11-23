@@ -41,4 +41,15 @@ public class UsuarioController {
             return ResponseEntity.ok(usuarioDtoConverter.convertUsuarioToUsuarioDto(guardado));
         }
     }
+
+    @PostMapping("/register/admin")
+    public ResponseEntity<GetUsuarioDto> nuevoAdmin(@RequestBody CreateUsuarioDto nuevoAdmin){
+        Usuario guardado = usuarioService.saveAdmin(nuevoAdmin);
+
+        if(guardado == null){
+            return ResponseEntity.badRequest().build();
+        }else{
+            return ResponseEntity.ok(usuarioDtoConverter.convertUsuarioToUsuarioDto(guardado));
+        }
+    }
 }
