@@ -41,4 +41,5 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
             return null;
         }
     }
+
 }

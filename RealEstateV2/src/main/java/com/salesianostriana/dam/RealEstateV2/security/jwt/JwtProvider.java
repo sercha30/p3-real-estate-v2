@@ -63,6 +63,7 @@ public class JwtProvider {
     public boolean validateToken(String token){
         try{
             jwtParser.parseClaimsJws(token);
+            return true;
         }catch(SignatureException | MalformedJwtException | ExpiredJwtException
                 | UnsupportedJwtException | IllegalArgumentException exception){
             log.info("Error con el token" + exception.getMessage());

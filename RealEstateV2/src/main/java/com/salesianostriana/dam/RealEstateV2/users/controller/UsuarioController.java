@@ -22,7 +22,7 @@ public class UsuarioController {
 
     @PostMapping("/register/user")
     public ResponseEntity<GetUsuarioDto> nuevoUsuario(@RequestBody CreateUsuarioDto nuevoUsuario){
-        Usuario guardado = usuarioService.save(nuevoUsuario);
+        Usuario guardado = usuarioService.savePropietario(nuevoUsuario);
 
         if(guardado == null){
             return ResponseEntity.badRequest().build();
