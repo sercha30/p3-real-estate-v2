@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a951d205-36a3-4c9c-a2e2-3156f06c24d2",
+		"_postman_id": "36dfafb8-eec8-4e60-a6ae-25eb2e7653c7",
 		"name": "RealEstateV2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Sergio\",\r\n    \"apellidos\": \"Chamorro Garcia\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"pepe@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Concha\",\r\n    \"apellidos\": \"Marina Rota\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"concha@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -39,13 +39,93 @@
 					"response": []
 				},
 				{
+					"name": "Nuevo gestor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5NDdiMTI0YS0zZDU4LTQ1NTgtYmNhOC03NWU4MjE4ZjhkNWEiLCJpYXQiOjE2Mzc3NjAwNjksIm5vbWJyZSI6IlNlcmdpbyIsImFwZWxsaWRvcyI6IkNoYW1vcnJvIEdhcmNpYSIsInJvbCI6IkFETUlOIn0.GBSp2B8mzRRZWVNUjEHdln79wCGa6VcRK9QmzURDdzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Juan\",\r\n    \"apellidos\": \"Del Pino Monteño\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"juan@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register/gestor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register",
+								"gestor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nuevo admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJeXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5NDdiMTI0YS0zZDU4LTQ1NTgtYmNhOC03NWU4MjE4ZjhkNWEiLCJpYXQiOjE2Mzc3NzEyOTUsIm5vbWJyZSI6IlNlcmdpbyIsImFwZWxsaWRvcyI6IkNoYW1vcnJvIEdhcmNpYSIsInJvbCI6IkFETUlOIn0.-7KkLsK1oFzvqFP1iWhZ40jy91vQfNA2ezaUCyf_img",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Marina\",\r\n    \"apellidos\": \"Del Mar Salado\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"marina@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Login",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"sergio@admin.com\",\r\n    \"password\": \"admin\"\r\n}",
+							"raw": "{\r\n    \"email\": \"juan@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -101,42 +181,36 @@
 		},
 		{
 			"name": "Gestores",
+			"item": []
+		},
+		{
+			"name": "Propietarios",
 			"item": [
 				{
-					"name": "Nuevo gestor",
+					"name": "Listar propietarios",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5NDdiMTI0YS0zZDU4LTQ1NTgtYmNhOC03NWU4MjE4ZjhkNWEiLCJpYXQiOjE2Mzc3NjAwNjksIm5vbWJyZSI6IlNlcmdpbyIsImFwZWxsaWRvcyI6IkNoYW1vcnJvIEdhcmNpYSIsInJvbCI6IkFETUlOIn0.GBSp2B8mzRRZWVNUjEHdln79wCGa6VcRK9QmzURDdzY",
+									"value": "eyJ0XAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhOWZlOWFmMC03ZDRkLTE3OWYtODE3ZC00ZGZhMmNiNDAwMDEiLCJpYXQiOjE2Mzc3NzcxOTAsIm5vbWJyZSI6Ikp1YW4iLCJhcGVsbGlkb3MiOiJEZWwgUGlubyBNb250ZcOxbyIsInJvbCI6IkdFU1RPUiJ9.y_tjo9z6KxN9a8oocDF_i128LGWkVGFVNto_QZZ7Mvg",
 									"type": "string"
 								}
 							]
 						},
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Juan\",\r\n    \"apellidos\": \"Del Pino Monteño\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"juan@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/auth/register/gestor",
+							"raw": "http://localhost:8080/propietario/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"auth",
-								"register",
-								"gestor"
+								"propietario",
+								""
 							]
 						}
 					},
