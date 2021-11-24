@@ -19,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -60,9 +61,7 @@ public class ViviendaController {
                 numHabitaciones, metrosCuadradosMin, metrosCuadradosMax, precioMin, precioMax, pageable);
 
         if (result.isEmpty()) {
-            return ResponseEntity
-                    .noContent()
-                    .build();
+            return ResponseEntity.noContent().build();
         } else {
             UriComponentsBuilder uriBuilder = UriComponentsBuilder
                     .fromHttpUrl(request.getRequestURL().toString());
@@ -72,6 +71,19 @@ public class ViviendaController {
                     .body(result.stream()
                             .map(viviendaListaDtoConverter::convertViviendaToGetViviendaListaDto)
                             .collect(Collectors.toList()));
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<GetViviendaDto> buscarVivienda(@PathVariable UUID id){
+        Optional<Vivienda> vivienda = viviendaService.findById(id);
+
+        if(vivienda.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity
+                    .ok()
+                    .body(viviendaDtoConverter.convertViviendaToViviendaDto(vivienda.get()));
         }
     }
 
