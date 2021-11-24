@@ -25,7 +25,7 @@ public class PropietarioController {
     public ResponseEntity<List<GetUsuarioDto>> listarPropietarios(){
         List<Usuario> resultado = usuarioService.findAllPropietarios();
 
-        if(resultado == null){
+        if(resultado == null || resultado.isEmpty()){
             return ResponseEntity
                     .noContent()
                     .build();
