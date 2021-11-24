@@ -8,7 +8,6 @@ import com.salesianostriana.dam.RealEstateV2.vivienda.service.base.BaseService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -150,13 +149,6 @@ public class ViviendaService extends BaseService<Vivienda, UUID, ViviendaReposit
 
         return this.repositorio.findAll(todos,pageable);
 
-    }
-
-    @EntityGraph(value = "grafoPropietarioVivienda",type = EntityGraph.EntityGraphType.LOAD)
-    public boolean isViviendaFromPropietario(Usuario usuario,UUID vivienda_id){
-        return usuario.getViviendas()
-                .stream()
-                .anyMatch(viviendaUsuario -> viviendaUsuario.getId().equals(vivienda_id));
     }
 
 }

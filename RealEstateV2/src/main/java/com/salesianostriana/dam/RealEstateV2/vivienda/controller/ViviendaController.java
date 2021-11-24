@@ -94,37 +94,37 @@ public class ViviendaController {
     public ResponseEntity<GetViviendaDto> editarVivienda(@PathVariable UUID id,
                                                          @RequestBody CreateViviendaDto vivienda,
                                                          @AuthenticationPrincipal Usuario usuario){
-        if(usuario.getRol().equals(UserRole.ADMIN)
-                || viviendaService.isViviendaFromPropietario(usuario,id)){
 
-            Optional<Vivienda> viviendaOptional = viviendaService.findById(id);
+        Optional<Vivienda> viviendaOptional = viviendaService.findById(id);
 
-            if(viviendaOptional.isEmpty()){
-                return ResponseEntity.notFound().build();
-            }else{
-                return ResponseEntity.status(HttpStatus.CREATED)
-                        .body(
-                            GetViviendaDto.builder()
-                                    .titulo(vivienda.getTitulo())
-                                    .tipo(vivienda.getTipo())
-                                    .avatar(vivienda.getAvatar())
-                                    .precio(vivienda.getPrecio())
-                                    .codigoPostal(vivienda.getCodigoPostal())
-                                    .descripcion(vivienda.getDescripcion())
-                                    .direccion(vivienda.getDireccion())
-                                    .latlng(vivienda.getLatlng())
-                                    .metrosCuadrados(vivienda.getMetrosCuadrados())
-                                    .numBanyos(vivienda.getNumBanyos())
-                                    .numHabitaciones(vivienda.getNumHabitaciones())
-                                    .poblacion(vivienda.getPoblacion())
-                                    .provincia(vivienda.getProvincia())
-                                    .tieneAscensor(vivienda.isTieneAscensor())
-                                    .tieneGaraje(vivienda.isTieneGaraje())
-                                    .tienePiscina(vivienda.isTienePiscina())
-                                    .build()
-                        );
+        if(viviendaOptional.isEmpty()){
+            return ResponseEntity.notFound().build();
+            }else {
+                if (usuario.getRol().equals(UserRole.ADMIN)
+                        || viviendaOptional.get().getPropietario().getId().equals(usuario.getId())) {
+                    return ResponseEntity.status(HttpStatus.CREATED)
+                            .body(
+                                    GetViviendaDto.builder()
+                                            .titulo(vivienda.getTitulo())
+                                            .tipo(vivienda.getTipo())
+                                            .avatar(vivienda.getAvatar())
+                                            .precio(vivienda.getPrecio())
+                                            .codigoPostal(vivienda.getCodigoPostal())
+                                            .descripcion(vivienda.getDescripcion())
+                                            .direccion(vivienda.getDireccion())
+                                            .latlng(vivienda.getLatlng())
+                                            .metrosCuadrados(vivienda.getMetrosCuadrados())
+                                            .numBanyos(vivienda.getNumBanyos())
+                                            .numHabitaciones(vivienda.getNumHabitaciones())
+                                            .poblacion(vivienda.getPoblacion())
+                                            .provincia(vivienda.getProvincia())
+                                            .tieneAscensor(vivienda.isTieneAscensor())
+                                            .tieneGaraje(vivienda.isTieneGaraje())
+                                            .tienePiscina(vivienda.isTienePiscina())
+                                            .build()
+                            );
+                }
             }
-        }
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
