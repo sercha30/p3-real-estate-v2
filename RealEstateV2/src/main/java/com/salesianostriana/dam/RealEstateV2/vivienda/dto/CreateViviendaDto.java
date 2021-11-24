@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.RealEstateV2.vivienda.dto;
 
-import com.salesianostriana.dam.RealEstateV2.vivienda.model.ViviendaTipo;
 import lombok.*;
 
 @Getter @Setter
@@ -16,7 +15,7 @@ public class CreateViviendaDto {
     private String codigoPostal;
     private String poblacion;
     private String provincia;
-    private ViviendaTipo tipo;
+    private String tipo;
     private Double precio;
     private Integer numHabitaciones;
     private Double metrosCuadrados;

@@ -11,6 +11,8 @@ public class CreateUsuarioDto {
     private String apellidos;
     private String avatar;
     private String email;
+    private String telefono;
+    private String direccion;
     private String password;
     private String password2;
 }

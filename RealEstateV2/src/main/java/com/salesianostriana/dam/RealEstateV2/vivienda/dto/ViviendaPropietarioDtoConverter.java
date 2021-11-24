@@ -4,14 +4,14 @@ import com.salesianostriana.dam.RealEstateV2.vivienda.model.Vivienda;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ViviendaSimpleDtoConverter {
+public class ViviendaPropietarioDtoConverter {
 
-    public GetViviendaSimpleDto convertViviendaToViviendaDto(Vivienda vivienda){
-        return GetViviendaSimpleDto.builder()
+    public GetViviendaPropietarioDto convertViviendaToViviendaDto(Vivienda vivienda){
+        return GetViviendaPropietarioDto.builder()
                 .id(vivienda.getId())
                 .titulo(vivienda.getTitulo())
                 .avatar(vivienda.getAvatar())
-                .tipo(vivienda.getTipo().name())
+                .tipo(vivienda.getTipo())
                 .precio(vivienda.getPrecio())
                 .build();
     }
