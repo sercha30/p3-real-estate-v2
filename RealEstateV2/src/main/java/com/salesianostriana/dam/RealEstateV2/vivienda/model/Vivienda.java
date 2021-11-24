@@ -50,7 +50,7 @@ public class Vivienda implements Serializable {
 
     private String provincia;
 
-    private ViviendaTipo tipo;
+    private String tipo;
 
     private Double precio;
 

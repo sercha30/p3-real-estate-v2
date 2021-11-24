@@ -28,4 +28,6 @@ public class GetViviendaDto {
     private boolean tieneGaraje;
     private String nombre_propietario;
     private String avatar_propietario;
+    private String email_propietario;
+    private String telefono_propietario;
 }

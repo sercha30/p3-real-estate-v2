@@ -1,7 +1,7 @@
 package com.salesianostriana.dam.RealEstateV2.users.dto.propietario;
 
 import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.GetUsuarioDto;
-import com.salesianostriana.dam.RealEstateV2.vivienda.dto.GetViviendaSimpleDto;
+import com.salesianostriana.dam.RealEstateV2.vivienda.dto.GetViviendaPropietarioDto;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -17,6 +17,6 @@ public class GetPropietarioDto extends GetUsuarioDto {
     private String telefono;
 
     @Builder.Default
-    private List<GetViviendaSimpleDto> viviendasEnPropiedad = new ArrayList<>();
+    private List<GetViviendaPropietarioDto> viviendasEnPropiedad = new ArrayList<>();
 
 }
