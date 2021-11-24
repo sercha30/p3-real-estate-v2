@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.RealEstateV2.users.model;
 
+import com.salesianostriana.dam.RealEstateV2.inmobiliaria.model.Inmobiliaria;
+import com.salesianostriana.dam.RealEstateV2.vivienda.model.Vivienda;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
@@ -8,11 +10,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -54,6 +54,17 @@ public class Usuario implements UserDetails, Serializable {
     private String password;
 
     private UserRole rol;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "propietario")
+    private List<Vivienda> viviendas = new ArrayList<>();
+
+    @ManyToOne
+    private Inmobiliaria inmobiliaria;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "vivienda")
+    private List<Interesa> listInteresa = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

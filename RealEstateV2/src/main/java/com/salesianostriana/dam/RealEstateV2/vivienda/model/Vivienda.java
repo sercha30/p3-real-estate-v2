@@ -1,12 +1,16 @@
 package com.salesianostriana.dam.RealEstateV2.vivienda.model;
 
 import com.salesianostriana.dam.RealEstateV2.inmobiliaria.model.Inmobiliaria;
+import com.salesianostriana.dam.RealEstateV2.users.model.Interesa;
+import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -64,4 +68,13 @@ public class Vivienda implements Serializable {
 
     @ManyToOne
     private Inmobiliaria inmobiliaria;
+
+    @ManyToOne
+    private Usuario propietario;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "vivienda")
+    private List<Interesa> listInteresa = new ArrayList<>();
+
+
 }

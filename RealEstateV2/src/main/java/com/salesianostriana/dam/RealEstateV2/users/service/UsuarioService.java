@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.RealEstateV2.users.service;
 
-import com.salesianostriana.dam.RealEstateV2.users.dto.CreateUsuarioDto;
+import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.CreateUsuarioDto;
 import com.salesianostriana.dam.RealEstateV2.users.model.UserRole;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import com.salesianostriana.dam.RealEstateV2.users.repos.UsuarioRepository;
@@ -85,6 +85,15 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
                     .filter(usuario -> usuario.getRol().name().contentEquals("PROPIETARIO"))
                     .collect(Collectors.toList());
         }
+    }
+
+    public Usuario findPropietarioById(UUID id) {
+        if(repositorio.findById(id).isEmpty()){
+            return null;
+        }else if (repositorio.findById(id).get().getRol().name().contentEquals("PROPIETARIO")){
+            return repositorio.findById(id).get();
+        }
+        return null;
     }
 
 }

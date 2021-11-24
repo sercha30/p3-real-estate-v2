@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.RealEstateV2.users.dto;
+package com.salesianostriana.dam.RealEstateV2.users.dto.usuario;
 
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import org.springframework.stereotype.Component;

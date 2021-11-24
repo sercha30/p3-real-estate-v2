@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.RealEstateV2.inmobiliaria.model;
 
+import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import com.salesianostriana.dam.RealEstateV2.vivienda.model.Vivienda;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -43,4 +44,7 @@ public class Inmobiliaria implements Serializable {
     @Builder.Default
     @OneToMany(mappedBy = "inmobiliaria")
     private List<Vivienda> listaViviendas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "inmobiliaria")
+    private List<Usuario> gestores = new ArrayList<>();
 }

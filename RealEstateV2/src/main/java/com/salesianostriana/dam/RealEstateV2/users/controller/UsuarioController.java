@@ -1,8 +1,8 @@
 package com.salesianostriana.dam.RealEstateV2.users.controller;
 
-import com.salesianostriana.dam.RealEstateV2.users.dto.CreateUsuarioDto;
-import com.salesianostriana.dam.RealEstateV2.users.dto.GetUsuarioDto;
-import com.salesianostriana.dam.RealEstateV2.users.dto.UsuarioDtoConverter;
+import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.CreateUsuarioDto;
+import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.GetUsuarioDto;
+import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.UsuarioDtoConverter;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import com.salesianostriana.dam.RealEstateV2.users.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
