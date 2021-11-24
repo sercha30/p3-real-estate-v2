@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.RealEstateV2.users.service;
 
-import com.salesianostriana.dam.RealEstateV2.users.dto.CreateUsuarioDto;
+import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.CreateUsuarioDto;
 import com.salesianostriana.dam.RealEstateV2.users.model.UserRole;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import com.salesianostriana.dam.RealEstateV2.users.repos.UsuarioRepository;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service("userDetailsService")
 @RequiredArgsConstructor
@@ -77,14 +76,20 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
     }
 
     public List<Usuario> findAllPropietarios() {
-        if(repositorio.findAll().isEmpty()){
+        if(repositorio.findAllByRol(UserRole.PROPIETARIO).isEmpty()){
             return null;
         }else {
-            return repositorio.findAll()
-                    .stream()
-                    .filter(usuario -> usuario.getRol().name().contentEquals("PROPIETARIO"))
-                    .collect(Collectors.toList());
+            return repositorio.findAllByRol(UserRole.PROPIETARIO).get();
         }
+    }
+
+    public Usuario findPropietarioById(UUID id) {
+        if(repositorio.findById(id).isEmpty()){
+            return null;
+        }else if (repositorio.findById(id).get().getRol().name().contentEquals("PROPIETARIO")){
+            return repositorio.findById(id).get();
+        }
+        return null;
     }
 
 }
