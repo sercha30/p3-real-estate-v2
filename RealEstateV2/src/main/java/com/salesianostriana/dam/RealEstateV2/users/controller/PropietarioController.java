@@ -44,6 +44,12 @@ public class PropietarioController {
     @GetMapping("/{id}")
     public ResponseEntity<GetUsuarioDto> buscarPropietario(@PathVariable UUID id,
                                                            @AuthenticationPrincipal Usuario usuario){
+        return ResponseEntity.ok()
+                .body(
+                        usuarioDtoConverter.convertUsuarioToUsuarioDto(
+                            usuarioService.findPropietarioById(id)
+                        )
+                );
 
     }
 }

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service("userDetailsService")
 @RequiredArgsConstructor
@@ -77,13 +76,10 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
     }
 
     public List<Usuario> findAllPropietarios() {
-        if(repositorio.findAll().isEmpty()){
+        if(repositorio.findAllByRol("PROPIETARIO").isEmpty()){
             return null;
         }else {
-            return repositorio.findAll()
-                    .stream()
-                    .filter(usuario -> usuario.getRol().name().contentEquals("PROPIETARIO"))
-                    .collect(Collectors.toList());
+            return repositorio.findAllByRol("PROPIETARIO").get();
         }
     }
 
