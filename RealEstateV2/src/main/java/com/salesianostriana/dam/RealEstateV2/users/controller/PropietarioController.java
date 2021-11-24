@@ -10,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -32,7 +29,7 @@ public class PropietarioController {
     public ResponseEntity<List<GetUsuarioDto>> listarPropietarios(){
         List<Usuario> resultado = usuarioService.findAllPropietarios();
 
-        if(resultado == null || resultado.isEmpty()){
+        if(resultado == null){
             return ResponseEntity
                     .noContent()
                     .build();
@@ -55,6 +52,17 @@ public class PropietarioController {
                                     usuarioService.findPropietarioById(id)
                             )
                     );
+        }
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminarPropietario(@PathVariable UUID id,
+                                                 @AuthenticationPrincipal Usuario usuario){
+        if(usuario.getRol().equals(UserRole.ADMIN) || usuario.getId().equals(id)){
+            usuarioService.deleteById(id);
+            return ResponseEntity.noContent().build();
         }
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
