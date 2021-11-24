@@ -1,7 +1,7 @@
 package com.salesianostriana.dam.RealEstateV2.users.dto.propietario;
 
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
-import com.salesianostriana.dam.RealEstateV2.vivienda.dto.ViviendaDtoConverter;
+import com.salesianostriana.dam.RealEstateV2.vivienda.dto.ViviendaSimpleDtoConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PropietarioDtoConverter {
 
-    private final ViviendaDtoConverter viviendaDtoConverter;
+    private final ViviendaSimpleDtoConverter viviendaDtoConverter;
 
     public GetPropietarioDto convertPropietarioToPropietarioDto(Usuario usuario){
         return GetPropietarioDto.builder()

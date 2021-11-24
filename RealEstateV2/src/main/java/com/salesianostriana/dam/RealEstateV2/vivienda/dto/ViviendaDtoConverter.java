@@ -8,11 +8,25 @@ public class ViviendaDtoConverter {
 
     public GetViviendaDto convertViviendaToViviendaDto(Vivienda vivienda){
         return GetViviendaDto.builder()
-                .id(vivienda.getId())
                 .titulo(vivienda.getTitulo())
-                .avatar(vivienda.getAvatar())
                 .tipo(vivienda.getTipo().name())
+                .avatar(vivienda.getAvatar())
+                .id(vivienda.getId())
                 .precio(vivienda.getPrecio())
+                .codigoPostal(vivienda.getCodigoPostal())
+                .descripcion(vivienda.getDescripcion())
+                .direccion(vivienda.getDireccion())
+                .latlng(vivienda.getLatlng())
+                .metrosCuadrados(vivienda.getMetrosCuadrados())
+                .numBanyos(vivienda.getNumBanyos())
+                .numHabitaciones(vivienda.getNumHabitaciones())
+                .poblacion(vivienda.getPoblacion())
+                .provincia(vivienda.getProvincia())
+                .tieneAscensor(vivienda.isTieneAscensor())
+                .tieneGaraje(vivienda.isTieneGaraje())
+                .tienePiscina(vivienda.isTienePiscina())
+                .avatar_propietario(vivienda.getPropietario().getAvatar())
+                .nombre_propietario(vivienda.getPropietario().getNombre() + " " + vivienda.getPropietario().getApellidos())
                 .build();
     }
 }
