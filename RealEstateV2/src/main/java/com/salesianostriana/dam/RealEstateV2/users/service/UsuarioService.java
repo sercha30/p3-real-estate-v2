@@ -86,7 +86,7 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
     public Usuario findPropietarioById(UUID id) {
         if(repositorio.findById(id).isEmpty()){
             return null;
-        }else if (repositorio.findById(id).get().getRol().name().contentEquals("PROPIETARIO")){
+        }else if (repositorio.findById(id).get().getRol().equals(UserRole.PROPIETARIO)){
             return repositorio.findById(id).get();
         }
         return null;
