@@ -1,10 +1,13 @@
 package com.salesianostriana.dam.RealEstateV2.users.controller;
 
+import com.salesianostriana.dam.RealEstateV2.users.dto.propietario.PropietarioDtoConverter;
 import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.GetUsuarioDto;
 import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.UsuarioDtoConverter;
+import com.salesianostriana.dam.RealEstateV2.users.model.UserRole;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import com.salesianostriana.dam.RealEstateV2.users.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,7 @@ public class PropietarioController {
 
     private final UsuarioService usuarioService;
     private final UsuarioDtoConverter usuarioDtoConverter;
+    private final PropietarioDtoConverter propietarioDtoConverter;
 
     @GetMapping("/")
     public ResponseEntity<List<GetUsuarioDto>> listarPropietarios(){
@@ -44,12 +48,15 @@ public class PropietarioController {
     @GetMapping("/{id}")
     public ResponseEntity<GetUsuarioDto> buscarPropietario(@PathVariable UUID id,
                                                            @AuthenticationPrincipal Usuario usuario){
-        return ResponseEntity.ok()
-                .body(
-                        usuarioDtoConverter.convertUsuarioToUsuarioDto(
-                            usuarioService.findPropietarioById(id)
-                        )
-                );
+        if(usuario.getRol().equals(UserRole.ADMIN) || usuario.getId().equals(id)){
+            return ResponseEntity.ok()
+                    .body(
+                            propietarioDtoConverter.convertPropietarioToPropietarioDto(
+                                    usuarioService.findPropietarioById(id)
+                            )
+                    );
+        }
 
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 }

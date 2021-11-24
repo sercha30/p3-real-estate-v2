@@ -76,10 +76,10 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
     }
 
     public List<Usuario> findAllPropietarios() {
-        if(repositorio.findAllByRol("PROPIETARIO").isEmpty()){
+        if(repositorio.findAllByRol(UserRole.PROPIETARIO).isEmpty()){
             return null;
         }else {
-            return repositorio.findAllByRol("PROPIETARIO").get();
+            return repositorio.findAllByRol(UserRole.PROPIETARIO).get();
         }
     }
 

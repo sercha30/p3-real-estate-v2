@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PropietarioDtoConverter {
 
-    private ViviendaDtoConverter viviendaDtoConverter;
+    private final ViviendaDtoConverter viviendaDtoConverter;
 
     public GetPropietarioDto convertPropietarioToPropietarioDto(Usuario usuario){
         return GetPropietarioDto.builder()
