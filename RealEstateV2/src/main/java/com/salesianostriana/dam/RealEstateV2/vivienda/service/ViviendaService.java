@@ -158,4 +158,10 @@ public class ViviendaService extends BaseService<Vivienda, UUID, ViviendaReposit
         return save(vivienda);
     }
 
+    public Vivienda removeGestionInmobiliaria(Vivienda vivienda,Inmobiliaria inmobiliaria){
+        vivienda.removeFromInmobiliaria(inmobiliaria);
+
+        return save(vivienda);
+    }
+
 }
