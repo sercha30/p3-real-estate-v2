@@ -6,6 +6,8 @@ import com.salesianostriana.dam.RealEstateV2.inmobiliaria.dto.InmobiliariaDtoCon
 import com.salesianostriana.dam.RealEstateV2.inmobiliaria.model.Inmobiliaria;
 import com.salesianostriana.dam.RealEstateV2.inmobiliaria.service.InmobiliariaService;
 import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.CreateGestorDto;
+import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.GetUsuarioDto;
+import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.UsuarioDtoConverter;
 import com.salesianostriana.dam.RealEstateV2.users.model.UserRole;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import com.salesianostriana.dam.RealEstateV2.users.service.UsuarioService;
@@ -15,8 +17,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +30,7 @@ public class InmobiliariaController {
     private final InmobiliariaService inmobiliariaService;
     private final UsuarioService usuarioService;
     private final InmobiliariaDtoConverter inmobiliariaDtoConverter;
+    private final UsuarioDtoConverter usuarioDtoConverter;
 
     @PostMapping("/")
     public ResponseEntity<GetInmobiliariaDto> addNuevaInmobiliaria(
@@ -82,5 +87,22 @@ public class InmobiliariaController {
         }
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+
+    @GetMapping("/{id}/gestor/")
+    public ResponseEntity<List<GetUsuarioDto>> listarGestores(@PathVariable UUID id){
+
+        Optional<Inmobiliaria> inmobiliaria = inmobiliariaService.findById(id);
+
+        if(inmobiliaria.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok(
+                    inmobiliaria.get().getGestores()
+                            .stream()
+                            .map(usuarioDtoConverter::convertUsuarioToUsuarioDto)
+                            .collect(Collectors.toList())
+            );
+        }
     }
 }
