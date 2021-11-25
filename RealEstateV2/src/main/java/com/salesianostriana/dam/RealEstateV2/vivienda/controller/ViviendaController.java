@@ -102,27 +102,33 @@ public class ViviendaController {
             }else {
                 if (usuario.getRol().equals(UserRole.ADMIN)
                         || viviendaOptional.get().getPropietario().getId().equals(usuario.getId())) {
-                    return ResponseEntity.status(HttpStatus.CREATED)
-                            .body(
-                                    GetViviendaDto.builder()
-                                            .titulo(vivienda.getTitulo())
-                                            .tipo(vivienda.getTipo())
-                                            .avatar(vivienda.getAvatar())
-                                            .precio(vivienda.getPrecio())
-                                            .codigoPostal(vivienda.getCodigoPostal())
-                                            .descripcion(vivienda.getDescripcion())
-                                            .direccion(vivienda.getDireccion())
-                                            .latlng(vivienda.getLatlng())
-                                            .metrosCuadrados(vivienda.getMetrosCuadrados())
-                                            .numBanyos(vivienda.getNumBanyos())
-                                            .numHabitaciones(vivienda.getNumHabitaciones())
-                                            .poblacion(vivienda.getPoblacion())
-                                            .provincia(vivienda.getProvincia())
-                                            .tieneAscensor(vivienda.isTieneAscensor())
-                                            .tieneGaraje(vivienda.isTieneGaraje())
-                                            .tienePiscina(vivienda.isTienePiscina())
-                                            .build()
-                            );
+                    GetViviendaDto viviendaDto = GetViviendaDto.builder()
+                                                    .id(id)
+                                                    .titulo(vivienda.getTitulo())
+                                                    .tipo(vivienda.getTipo())
+                                                    .avatar(vivienda.getAvatar())
+                                                    .precio(vivienda.getPrecio())
+                                                    .codigoPostal(vivienda.getCodigoPostal())
+                                                    .descripcion(vivienda.getDescripcion())
+                                                    .direccion(vivienda.getDireccion())
+                                                    .latlng(vivienda.getLatlng())
+                                                    .metrosCuadrados(vivienda.getMetrosCuadrados())
+                                                    .numBanyos(vivienda.getNumBanyos())
+                                                    .numHabitaciones(vivienda.getNumHabitaciones())
+                                                    .poblacion(vivienda.getPoblacion())
+                                                    .provincia(vivienda.getProvincia())
+                                                    .tieneAscensor(vivienda.isTieneAscensor())
+                                                    .tieneGaraje(vivienda.isTieneGaraje())
+                                                    .tienePiscina(vivienda.isTienePiscina())
+                                                    .nombre_propietario(viviendaOptional.get().getPropietario().getNombre())
+                                                    .avatar_propietario(viviendaOptional.get().getPropietario().getAvatar())
+                                                    .email_propietario(viviendaOptional.get().getPropietario().getEmail())
+                                                    .telefono_propietario(viviendaOptional.get().getPropietario().getTelefono())
+                                                    .build();
+
+                    viviendaService.save(viviendaDtoConverter.CreateViviendaDtoToVivienda(vivienda,viviendaOptional.get()));
+
+                    return ResponseEntity.status(HttpStatus.CREATED).body(viviendaDto);
                 }
             }
 
