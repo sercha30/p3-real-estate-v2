@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.RealEstateV2.vivienda.service;
 
+import com.salesianostriana.dam.RealEstateV2.inmobiliaria.model.Inmobiliaria;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import com.salesianostriana.dam.RealEstateV2.vivienda.dto.CreateViviendaDto;
 import com.salesianostriana.dam.RealEstateV2.vivienda.model.Vivienda;
@@ -149,6 +150,12 @@ public class ViviendaService extends BaseService<Vivienda, UUID, ViviendaReposit
 
         return this.repositorio.findAll(todos,pageable);
 
+    }
+
+    public Vivienda addGestionInmobiliaria(Vivienda vivienda,Inmobiliaria inmobiliaria){
+        vivienda.addToInmobiliaria(inmobiliaria);
+
+        return save(vivienda);
     }
 
 }

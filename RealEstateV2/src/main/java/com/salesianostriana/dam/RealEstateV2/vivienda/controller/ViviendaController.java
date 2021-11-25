@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.RealEstateV2.vivienda.controller;
 
+import com.salesianostriana.dam.RealEstateV2.inmobiliaria.model.Inmobiliaria;
+import com.salesianostriana.dam.RealEstateV2.inmobiliaria.service.InmobiliariaService;
 import com.salesianostriana.dam.RealEstateV2.pagination.PaginationUtilsLinks;
 import com.salesianostriana.dam.RealEstateV2.users.model.UserRole;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
@@ -30,6 +32,7 @@ import java.util.stream.Collectors;
 public class ViviendaController {
 
     private final ViviendaService viviendaService;
+    private final InmobiliariaService inmobiliariaService;
     private final ViviendaDtoConverter viviendaDtoConverter;
     private final ViviendaListaDtoConverter viviendaListaDtoConverter;
     private final PaginationUtilsLinks paginationUtilsLinks;
@@ -147,6 +150,27 @@ public class ViviendaController {
                     || viviendaOptional.get().getPropietario().getId().equals(usuario.getId())) {
                 viviendaService.deleteById(id);
                 return ResponseEntity.noContent().build();
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+
+    @PostMapping("/vivienda/{id}/inmobiliaria/{id2}")
+    public ResponseEntity<GetViviendaDto> establecerGestionInmobiliaria(@PathVariable UUID id,
+                                                                        @PathVariable UUID id2,
+                                                                        @AuthenticationPrincipal Usuario usuario) {
+        Optional<Vivienda> viviendaOptional = viviendaService.findById(id);
+        Optional<Inmobiliaria> inmobiliariaOptional = inmobiliariaService.findById(id2);
+
+        if (viviendaOptional.isEmpty() || inmobiliariaOptional.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            if (usuario.getRol().equals(UserRole.ADMIN)
+                    || viviendaOptional.get().getPropietario().getId().equals(usuario.getId())) {
+                viviendaService.addGestionInmobiliaria(viviendaOptional.get(),inmobiliariaOptional.get());
+                return ResponseEntity.status(HttpStatus.CREATED)
+                        .body(viviendaDtoConverter.convertViviendaToViviendaDto(viviendaOptional.get()));
             }
         }
 

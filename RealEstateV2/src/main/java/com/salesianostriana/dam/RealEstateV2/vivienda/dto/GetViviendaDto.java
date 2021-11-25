@@ -30,4 +30,5 @@ public class GetViviendaDto {
     private String avatar_propietario;
     private String email_propietario;
     private String telefono_propietario;
+    private String nombre_inmobiliaria;
 }

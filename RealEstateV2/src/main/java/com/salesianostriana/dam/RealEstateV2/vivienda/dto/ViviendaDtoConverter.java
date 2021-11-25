@@ -29,6 +29,8 @@ public class ViviendaDtoConverter {
                 .nombre_propietario(vivienda.getPropietario().getNombre() + " " + vivienda.getPropietario().getApellidos())
                 .telefono_propietario(vivienda.getPropietario().getTelefono())
                 .email_propietario(vivienda.getPropietario().getEmail())
+                .nombre_inmobiliaria(vivienda.getInmobiliaria() == null ?
+                        "Particular" : vivienda.getInmobiliaria().getNombre())
                 .build();
     }
 
