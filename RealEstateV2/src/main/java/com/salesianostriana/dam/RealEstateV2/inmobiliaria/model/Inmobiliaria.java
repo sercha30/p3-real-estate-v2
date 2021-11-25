@@ -45,6 +45,7 @@ public class Inmobiliaria implements Serializable {
     @OneToMany(mappedBy = "inmobiliaria")
     private List<Vivienda> listaViviendas = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "inmobiliaria")
     private List<Usuario> gestores = new ArrayList<>();
 }

@@ -54,6 +54,8 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
                     .avatar(nuevoGestor.getAvatar())
                     .email(nuevoGestor.getEmail())
                     .nombre(nuevoGestor.getNombre())
+                    .direccion(nuevoGestor.getDireccion())
+                    .telefono(nuevoGestor.getTelefono())
                     .rol(UserRole.GESTOR)
                     .build();
             return save(usuario);

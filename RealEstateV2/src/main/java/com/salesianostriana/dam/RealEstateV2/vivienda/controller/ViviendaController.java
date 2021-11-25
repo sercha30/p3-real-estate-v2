@@ -129,7 +129,7 @@ public class ViviendaController {
                                                     .telefono_propietario(viviendaOptional.get().getPropietario().getTelefono())
                                                     .build();
 
-                    viviendaService.save(viviendaDtoConverter.CreateViviendaDtoToVivienda(vivienda,viviendaOptional.get()));
+                    viviendaService.edit(viviendaDtoConverter.CreateViviendaDtoToVivienda(vivienda,viviendaOptional.get()));
 
                     return ResponseEntity.status(HttpStatus.CREATED).body(viviendaDto);
                 }

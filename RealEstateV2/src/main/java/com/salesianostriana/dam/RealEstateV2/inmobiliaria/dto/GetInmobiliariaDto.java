@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.RealEstateV2.inmobiliaria.dto;
 
+import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.GetUsuarioDto;
 import com.salesianostriana.dam.RealEstateV2.vivienda.dto.GetViviendaPropietarioDto;
 import lombok.*;
 
@@ -19,4 +20,7 @@ public class GetInmobiliariaDto {
 
     @Builder.Default
     private List<GetViviendaPropietarioDto> viviendas = new ArrayList<>();
+
+    @Builder.Default
+    private List<GetUsuarioDto> gestores = new ArrayList<>();
 }

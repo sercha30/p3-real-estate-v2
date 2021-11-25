@@ -38,7 +38,7 @@ public class UsuarioController {
     public ResponseEntity<GetUsuarioDto> nuevoGestor(@RequestBody CreateGestorDto nuevoGestor){
         Usuario guardado = usuarioService.saveGestor(nuevoGestor);
 
-        if(guardado == null || nuevoGestor.getInmobiliaria() == null){
+        if(guardado == null || nuevoGestor.getInmobiliaria().getId() == null){
             return ResponseEntity.badRequest().build();
         }else{
             return ResponseEntity.status(HttpStatus.CREATED)
