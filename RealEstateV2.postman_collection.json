@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "992e559a-38e1-4df6-a316-e612254fa973",
+		"_postman_id": "e1a6db95-b847-46ed-979f-b16497d72a5d",
 		"name": "RealEstateV2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -421,6 +421,49 @@
 							"path": [
 								"vivienda",
 								"a9fe0f58-7d53-1eb2-817d-53efeb240001"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inmobiliarias",
+			"item": [
+				{
+					"name": "Nueva inmobiliaria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"TecnoCasa\",\r\n    \"email\":\"tecnocasa@gmail.com\",\r\n    \"telefono\":\"954782145\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/inmobiliaria/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inmobiliaria",
+								""
 							]
 						}
 					},
