@@ -90,17 +90,38 @@ public class InmobiliariaController {
     }
 
     @GetMapping("/{id}/gestor/")
-    public ResponseEntity<List<GetUsuarioDto>> listarGestores(@PathVariable UUID id){
+    public ResponseEntity<List<GetUsuarioDto>> listarGestores(@PathVariable UUID id,
+                                                              @AuthenticationPrincipal Usuario usuario){
 
         Optional<Inmobiliaria> inmobiliaria = inmobiliariaService.findById(id);
 
         if(inmobiliaria.isEmpty()){
             return ResponseEntity.notFound().build();
-        }else{
+        }else if(usuario.getRol().equals(UserRole.ADMIN) || usuario.getInmobiliaria()
+                                                                        .getId()
+                                                                        .equals(inmobiliaria.get().getId())){
             return ResponseEntity.ok(
                     inmobiliaria.get().getGestores()
                             .stream()
                             .map(usuarioDtoConverter::convertUsuarioToUsuarioDto)
+                            .collect(Collectors.toList())
+            );
+        }
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<GetInmobiliariaDto>> listarInmobiliarias(){
+
+        List<Inmobiliaria> inmobiliarias = inmobiliariaService.findAll();
+
+        if(inmobiliarias.isEmpty()){
+            return ResponseEntity.noContent().build();
+        } else{
+            return ResponseEntity.ok(
+                    inmobiliarias.stream()
+                            .map(inmobiliariaDtoConverter::convertInmobiliariaToGetInmobiliariaDto)
                             .collect(Collectors.toList())
             );
         }
