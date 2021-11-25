@@ -72,6 +72,20 @@ public class Usuario implements UserDetails, Serializable {
     @OneToMany(mappedBy = "vivienda")
     private List<Interesa> listInteresa = new ArrayList<>();
 
+    //HELPERS INMOBILIARIA
+
+    public void addToInmobiliaria(Inmobiliaria i) {
+        this.inmobiliaria = i;
+        i.getGestores().add(this);
+    }
+
+    public void removeFromInmobiliaria(Inmobiliaria i) {
+        i.getGestores().remove(this);
+        this.inmobiliaria = null;
+    }
+
+    //**************************************************
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + rol.name()));
