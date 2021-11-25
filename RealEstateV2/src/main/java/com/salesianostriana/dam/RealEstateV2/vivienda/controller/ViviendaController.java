@@ -3,8 +3,13 @@ package com.salesianostriana.dam.RealEstateV2.vivienda.controller;
 import com.salesianostriana.dam.RealEstateV2.inmobiliaria.model.Inmobiliaria;
 import com.salesianostriana.dam.RealEstateV2.inmobiliaria.service.InmobiliariaService;
 import com.salesianostriana.dam.RealEstateV2.pagination.PaginationUtilsLinks;
+import com.salesianostriana.dam.RealEstateV2.users.dto.interesa.CreateInteresaDto;
+import com.salesianostriana.dam.RealEstateV2.users.dto.interesa.CreateInteresaSimpleDto;
+import com.salesianostriana.dam.RealEstateV2.users.dto.interesa.GetInteresaDto;
+import com.salesianostriana.dam.RealEstateV2.users.dto.interesa.InteresaDtoConverter;
 import com.salesianostriana.dam.RealEstateV2.users.model.UserRole;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
+import com.salesianostriana.dam.RealEstateV2.users.service.InteresaService;
 import com.salesianostriana.dam.RealEstateV2.vivienda.dto.CreateViviendaDto;
 import com.salesianostriana.dam.RealEstateV2.vivienda.dto.GetViviendaDto;
 import com.salesianostriana.dam.RealEstateV2.vivienda.dto.ViviendaDtoConverter;
@@ -33,8 +38,10 @@ public class ViviendaController {
 
     private final ViviendaService viviendaService;
     private final InmobiliariaService inmobiliariaService;
+    private final InteresaService interesaService;
     private final ViviendaDtoConverter viviendaDtoConverter;
     private final ViviendaListaDtoConverter viviendaListaDtoConverter;
+    private final InteresaDtoConverter interesaDtoConverter;
     private final PaginationUtilsLinks paginationUtilsLinks;
 
     @PostMapping("/")
@@ -198,6 +205,25 @@ public class ViviendaController {
         }
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+
+    @PostMapping("/{id}/meinteresa")
+    public ResponseEntity<GetInteresaDto> addInteres(@PathVariable UUID id,
+                                                     @RequestBody CreateInteresaSimpleDto mensaje,
+                                                     @AuthenticationPrincipal Usuario usuario,
+                                                     CreateInteresaDto nuevoInteres){
+        Optional<Vivienda> vivienda = viviendaService.findById(id);
+
+        if(vivienda.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(
+                            interesaDtoConverter.convertInteresaToInteresaDto(
+                                    interesaService.saveInteresa(nuevoInteres,mensaje,
+                                            usuario,vivienda.get()))
+                    );
+        }
     }
 
 }
