@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.RealEstateV2.users.controller;
 
+import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.CreateGestorDto;
 import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.CreateUsuarioDto;
 import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.GetUsuarioDto;
 import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.UsuarioDtoConverter;
@@ -34,10 +35,10 @@ public class UsuarioController {
     }
 
     @PostMapping("/register/gestor")
-    public ResponseEntity<GetUsuarioDto> nuevoGestor(@RequestBody CreateUsuarioDto nuevoGestor){
+    public ResponseEntity<GetUsuarioDto> nuevoGestor(@RequestBody CreateGestorDto nuevoGestor){
         Usuario guardado = usuarioService.saveGestor(nuevoGestor);
 
-        if(guardado == null){
+        if(guardado == null || nuevoGestor.getInmobiliaria() == null){
             return ResponseEntity.badRequest().build();
         }else{
             return ResponseEntity.status(HttpStatus.CREATED)
