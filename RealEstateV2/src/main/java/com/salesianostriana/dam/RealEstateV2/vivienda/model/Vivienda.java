@@ -76,5 +76,17 @@ public class Vivienda implements Serializable {
     @OneToMany(mappedBy = "vivienda",cascade = CascadeType.REMOVE)
     private List<Interesa> listInteresa = new ArrayList<>();
 
+    //HELPERS INMOBILIARIA
 
+    public void addToInmobiliaria(Inmobiliaria i) {
+        this.inmobiliaria = i;
+        i.getListaViviendas().add(this);
+    }
+
+    public void removeFromInmobiliaria(Inmobiliaria i) {
+        i.getListaViviendas().remove(this);
+        this.inmobiliaria = null;
+    }
+
+    //**************************************************
 }

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e1a6db95-b847-46ed-979f-b16497d72a5d",
+		"_postman_id": "34ee7a7b-17d3-4c0c-ab6e-145badeb4acc",
 		"name": "RealEstateV2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -50,12 +50,25 @@
 				},
 				{
 					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\",jsonData.token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"concha@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"email\": \"sergio@admin.com\",\r\n    \"password\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -85,7 +98,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5NDdiMTI0YS0zZDU4LTQ1NTgtYmNhOC03NWU4MjE4ZjhkNWEiLCJpYXQiOjE2Mzc3NTg5MjIsIm5vbWJyZSI6IlNlcmdpbyIsImFwZWxsaWRvcyI6IkNoYW1vcnJvIEdhcmNpYSIsInJvbCI6IkFETUlOIn0.J3SvPnJj1KaYP7BHAxWAg2W8JvWpeShs_L0VFbvaiNg",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -425,6 +438,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Eliminar vivienda",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vivienda/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -470,6 +512,12 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
 		}
 	]
 }

@@ -15,6 +15,7 @@ public class InmobiliariaDtoConverter {
 
     public GetInmobiliariaDto convertInmobiliariaToGetInmobiliariaDto(Inmobiliaria inmobiliaria){
         return GetInmobiliariaDto.builder()
+                .id(inmobiliaria.getId())
                 .nombre(inmobiliaria.getNombre())
                 .email(inmobiliaria.getEmail())
                 .telefono(inmobiliaria.getTelefono())
