@@ -168,9 +168,32 @@ public class ViviendaController {
         } else {
             if (usuario.getRol().equals(UserRole.ADMIN)
                     || viviendaOptional.get().getPropietario().getId().equals(usuario.getId())) {
-                viviendaService.addGestionInmobiliaria(viviendaOptional.get(),inmobiliariaOptional.get());
+                Vivienda viviendaGestionada = viviendaService
+                        .addGestionInmobiliaria(viviendaOptional.get(),inmobiliariaOptional.get());
                 return ResponseEntity.status(HttpStatus.CREATED)
-                        .body(viviendaDtoConverter.convertViviendaToViviendaDto(viviendaOptional.get()));
+                        .body(viviendaDtoConverter.convertViviendaToViviendaDto(viviendaGestionada));
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+
+    @DeleteMapping("/vivienda/{id}/inmobiliaria/{id2}")
+    public ResponseEntity<GetViviendaDto> eliminarGestionInmobiliaria(@PathVariable UUID id,
+                                                                        @PathVariable UUID id2,
+                                                                        @AuthenticationPrincipal Usuario usuario) {
+        Optional<Vivienda> viviendaOptional = viviendaService.findById(id);
+        Optional<Inmobiliaria> inmobiliariaOptional = inmobiliariaService.findById(id2);
+
+        if (viviendaOptional.isEmpty() || inmobiliariaOptional.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            if (usuario.getRol().equals(UserRole.ADMIN)
+                    || viviendaOptional.get().getPropietario().getId().equals(usuario.getId())) {
+                Vivienda viviendaNoGestionada = viviendaService
+                        .removeGestionInmobiliaria(viviendaOptional.get(),inmobiliariaOptional.get());
+                return ResponseEntity.status(HttpStatus.CREATED)
+                        .body(viviendaDtoConverter.convertViviendaToViviendaDto(viviendaNoGestionada));
             }
         }
 
