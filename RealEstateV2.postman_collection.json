@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "36dfafb8-eec8-4e60-a6ae-25eb2e7653c7",
+		"_postman_id": "992e559a-38e1-4df6-a316-e612254fa973",
 		"name": "RealEstateV2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -8,76 +8,6 @@
 		{
 			"name": "Usuarios",
 			"item": [
-				{
-					"name": "Nuevo propietario",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Concha\",\r\n    \"apellidos\": \"Marina Rota\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"concha@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/auth/register/user",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"auth",
-								"register",
-								"user"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Nuevo gestor",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5NDdiMTI0YS0zZDU4LTQ1NTgtYmNhOC03NWU4MjE4ZjhkNWEiLCJpYXQiOjE2Mzc3NjAwNjksIm5vbWJyZSI6IlNlcmdpbyIsImFwZWxsaWRvcyI6IkNoYW1vcnJvIEdhcmNpYSIsInJvbCI6IkFETUlOIn0.GBSp2B8mzRRZWVNUjEHdln79wCGa6VcRK9QmzURDdzY",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Juan\",\r\n    \"apellidos\": \"Del Pino Monteño\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"juan@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/auth/register/gestor",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"auth",
-								"register",
-								"gestor"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "Nuevo admin",
 					"request": {
@@ -125,7 +55,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"juan@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"email\": \"concha@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -181,11 +111,82 @@
 		},
 		{
 			"name": "Gestores",
-			"item": []
+			"item": [
+				{
+					"name": "Nuevo gestor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5NDdiMTI0YS0zZDU4LTQ1NTgtYmNhOC03NWU4MjE4ZjhkNWEiLCJpYXQiOjE2Mzc3NjAwNjksIm5vbWJyZSI6IlNlcmdpbyIsImFwZWxsaWRvcyI6IkNoYW1vcnJvIEdhcmNpYSIsInJvbCI6IkFETUlOIn0.GBSp2B8mzRRZWVNUjEHdln79wCGa6VcRK9QmzURDdzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Juan\",\r\n    \"apellidos\": \"Del Pino Monteño\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"juan@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register/gestor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register",
+								"gestor"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Propietarios",
 			"item": [
+				{
+					"name": "Nuevo propietario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Concha\",\r\n    \"apellidos\": \"Marina Rota\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"concha@gmail.com\",\r\n    \"telefono\":\"697854123\",\r\n    \"direccion\":\"Calle SuperFake, 1\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Listar propietarios",
 					"request": {
@@ -194,7 +195,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0XAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhOWZlOWFmMC03ZDRkLTE3OWYtODE3ZC00ZGZhMmNiNDAwMDEiLCJpYXQiOjE2Mzc3NzcxOTAsIm5vbWJyZSI6Ikp1YW4iLCJhcGVsbGlkb3MiOiJEZWwgUGlubyBNb250ZcOxbyIsInJvbCI6IkdFU1RPUiJ9.y_tjo9z6KxN9a8oocDF_i128LGWkVGFVNto_QZZ7Mvg",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhOWZlMGY1OC03ZDUzLTExNzQtODE3ZC01MzgxYjEyNjAwMDAiLCJpYXQiOjE2Mzc4Njk5NTIsIm5vbWJyZSI6IkNvbmNoYSIsImFwZWxsaWRvcyI6Ik1hcmluYSBSb3RhIiwicm9sIjoiUFJPUElFVEFSSU8ifQ.qW3cjA45YCkvq0QHoZfCEpUcoo-tNtPRulxAeDOoGE8",
 									"type": "string"
 								}
 							]
@@ -211,6 +212,215 @@
 							"path": [
 								"propietario",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar propietario por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhOWZlMGY1OC03ZDUzLTExNzQtODE3ZC01MzgxYjEyNjAwMDAiLCJpYXQiOjE2Mzc4Njk5NTIsIm5vbWJyZSI6IkNvbmNoYSIsImFwZWxsaWRvcyI6Ik1hcmluYSBSb3RhIiwicm9sIjoiUFJPUElFVEFSSU8ifQ.qW3cjA45YCkvq0QHoZfCEpUcoo-tNtPRulxAeDOoGE8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/propietario/a9fe0f58-7d53-1174-817d-5381b1260000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"propietario",
+								"a9fe0f58-7d53-1174-817d-5381b1260000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar propietario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhOWZlMGY1OC03ZDUyLTFkNGMtODE3ZC01MmNlOWViMTAwMDEiLCJpYXQiOjE2Mzc4NTgyNDAsIm5vbWJyZSI6IkNvbmNoYSIsImFwZWxsaWRvcyI6Ik1hcmluYSBSb3RhIiwicm9sIjoiUFJPUElFVEFSSU8ifQ.N23A8m9Z7d3W2-Ic-eoifo8pUAmdW2UCUhSgTapARBk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/propietario/a9fe0f58-7d52-1d4c-817d-52ce9eb10001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"propietario",
+								"a9fe0f58-7d52-1d4c-817d-52ce9eb10001"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Viviendas",
+			"item": [
+				{
+					"name": "Nueva vivienda",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhOWZlMGY1OC03ZDUzLTFlYjItODE3ZC01M2VmNTM1MzAwMDAiLCJpYXQiOjE2Mzc4NzcxMzUsIm5vbWJyZSI6IkNvbmNoYSIsImFwZWxsaWRvcyI6Ik1hcmluYSBSb3RhIiwicm9sIjoiUFJPUElFVEFSSU8ifQ.W5rXsk5ox302JK_Dk5HbJ7q96ZNa-pdyzOk_LhDIwsQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"Piso en Triana López de Gomara\",\r\n    \"descripcion\":\"Piso recién reformado. Sólo estudiantes.\",\r\n    \"avatar\":\"foto.png\",\r\n    \"latlng\":\"37.3785759,-6.0098034\",\r\n    \"direccion\":\"Calle Virgen del Rocío, 3\",\r\n    \"codigoPostal\":\"41980\",\r\n    \"poblacion\":\"La Algaba\",\r\n    \"provincia\":\"Granada\",\r\n    \"tipo\":\"ALQUILER\",\r\n    \"precio\":550,\r\n    \"numHabitaciones\":4,\r\n    \"metrosCuadrados\":120,\r\n    \"numBanyos\":3,\r\n    \"tienePiscina\":true,\r\n    \"tieneAscensor\":true,\r\n    \"tieneGaraje\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/vivienda/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar viviendas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhOWZlMGY1OC03ZDUzLTFmOTEtODE3ZC01MzhmYjcwNjAwMDAiLCJpYXQiOjE2Mzc4NzA4NjksIm5vbWJyZSI6IkNvbmNoYSIsImFwZWxsaWRvcyI6Ik1hcmluYSBSb3RhIiwicm9sIjoiUFJPUElFVEFSSU8ifQ.s3zYCqiySGVsm9rp5ctb7-ohda9NPlxbs6zX-m6AfPE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vivienda/?tipo=alquiler&codigoPostal=41980",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								""
+							],
+							"query": [
+								{
+									"key": "tipo",
+									"value": "alquiler"
+								},
+								{
+									"key": "codigoPostal",
+									"value": "41980"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar vivienda por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhOWZlMGY1OC03ZDUzLTFjMzAtODE3ZC01MzljZTUyZjAwMDAiLCJpYXQiOjE2Mzc4NzE3MzQsIm5vbWJyZSI6IkNvbmNoYSIsImFwZWxsaWRvcyI6Ik1hcmluYSBSb3RhIiwicm9sIjoiUFJPUElFVEFSSU8ifQ.PyTsrO92uzC5gLm9PBlIhCC7ZS1dhJLtNO0qB-stIUA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vivienda/a9fe0f58-7d53-1c30-817d-539d31740001",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"a9fe0f58-7d53-1c30-817d-539d31740001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar vivienda",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhOWZlMGY1OC03ZDUzLTFlYjItODE3ZC01M2VmNTM1MzAwMDAiLCJpYXQiOjE2Mzc4NzcxMzUsIm5vbWJyZSI6IkNvbmNoYSIsImFwZWxsaWRvcyI6Ik1hcmluYSBSb3RhIiwicm9sIjoiUFJPUElFVEFSSU8ifQ.W5rXsk5ox302JK_Dk5HbJ7q96ZNa-pdyzOk_LhDIwsQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Piso en Triana López de Gomara\",\r\n    \"descripcion\": \"Piso recién reformado. Sólo estudiantes.\",\r\n    \"avatar\": \"foto.png\",\r\n    \"latlng\": \"37.3785759,-6.0098034\",\r\n    \"direccion\": \"Calle Virgen del Rocío, 3\",\r\n    \"codigoPostal\": \"41980\",\r\n    \"poblacion\": \"La Algaba\",\r\n    \"provincia\": \"Granada\",\r\n    \"tipo\": \"VENTA\",\r\n    \"precio\": 550,\r\n    \"numHabitaciones\": 4,\r\n    \"metrosCuadrados\": 120,\r\n    \"numBanyos\": 3,\r\n    \"tienePiscina\": true,\r\n    \"tieneAscensor\": true,\r\n    \"tieneGaraje\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/vivienda/a9fe0f58-7d53-1eb2-817d-53efeb240001",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"a9fe0f58-7d53-1eb2-817d-53efeb240001"
 							]
 						}
 					},

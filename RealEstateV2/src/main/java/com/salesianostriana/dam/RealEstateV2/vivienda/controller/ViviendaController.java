@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.RealEstateV2.vivienda.controller;
 
 import com.salesianostriana.dam.RealEstateV2.pagination.PaginationUtilsLinks;
+import com.salesianostriana.dam.RealEstateV2.users.model.UserRole;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import com.salesianostriana.dam.RealEstateV2.vivienda.dto.CreateViviendaDto;
 import com.salesianostriana.dam.RealEstateV2.vivienda.dto.GetViviendaDto;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +42,8 @@ public class ViviendaController {
         if(vivienda == null){
             return ResponseEntity.badRequest().build();
         }else{
-            return ResponseEntity.ok(viviendaDtoConverter.convertViviendaToViviendaDto(vivienda));
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(viviendaDtoConverter.convertViviendaToViviendaDto(vivienda));
         }
     }
 
@@ -85,6 +88,51 @@ public class ViviendaController {
                     .ok()
                     .body(viviendaDtoConverter.convertViviendaToViviendaDto(vivienda.get()));
         }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<GetViviendaDto> editarVivienda(@PathVariable UUID id,
+                                                         @RequestBody CreateViviendaDto vivienda,
+                                                         @AuthenticationPrincipal Usuario usuario){
+
+        Optional<Vivienda> viviendaOptional = viviendaService.findById(id);
+
+        if(viviendaOptional.isEmpty()){
+            return ResponseEntity.notFound().build();
+            }else {
+                if (usuario.getRol().equals(UserRole.ADMIN)
+                        || viviendaOptional.get().getPropietario().getId().equals(usuario.getId())) {
+                    GetViviendaDto viviendaDto = GetViviendaDto.builder()
+                                                    .id(id)
+                                                    .titulo(vivienda.getTitulo())
+                                                    .tipo(vivienda.getTipo())
+                                                    .avatar(vivienda.getAvatar())
+                                                    .precio(vivienda.getPrecio())
+                                                    .codigoPostal(vivienda.getCodigoPostal())
+                                                    .descripcion(vivienda.getDescripcion())
+                                                    .direccion(vivienda.getDireccion())
+                                                    .latlng(vivienda.getLatlng())
+                                                    .metrosCuadrados(vivienda.getMetrosCuadrados())
+                                                    .numBanyos(vivienda.getNumBanyos())
+                                                    .numHabitaciones(vivienda.getNumHabitaciones())
+                                                    .poblacion(vivienda.getPoblacion())
+                                                    .provincia(vivienda.getProvincia())
+                                                    .tieneAscensor(vivienda.isTieneAscensor())
+                                                    .tieneGaraje(vivienda.isTieneGaraje())
+                                                    .tienePiscina(vivienda.isTienePiscina())
+                                                    .nombre_propietario(viviendaOptional.get().getPropietario().getNombre())
+                                                    .avatar_propietario(viviendaOptional.get().getPropietario().getAvatar())
+                                                    .email_propietario(viviendaOptional.get().getPropietario().getEmail())
+                                                    .telefono_propietario(viviendaOptional.get().getPropietario().getTelefono())
+                                                    .build();
+
+                    viviendaService.save(viviendaDtoConverter.CreateViviendaDtoToVivienda(vivienda,viviendaOptional.get()));
+
+                    return ResponseEntity.status(HttpStatus.CREATED).body(viviendaDto);
+                }
+            }
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
 }

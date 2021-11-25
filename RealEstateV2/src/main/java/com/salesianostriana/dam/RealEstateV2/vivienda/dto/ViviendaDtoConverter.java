@@ -31,4 +31,29 @@ public class ViviendaDtoConverter {
                 .email_propietario(vivienda.getPropietario().getEmail())
                 .build();
     }
+
+    public Vivienda CreateViviendaDtoToVivienda(CreateViviendaDto createViviendaDto, Vivienda vivienda){
+        return new Vivienda(
+                vivienda.getId(),
+                createViviendaDto.getTitulo(),
+                createViviendaDto.getAvatar(),
+                createViviendaDto.getDescripcion(),
+                createViviendaDto.getCodigoPostal(),
+                createViviendaDto.getLatlng(),
+                createViviendaDto.getDireccion(),
+                createViviendaDto.getPoblacion(),
+                createViviendaDto.getProvincia(),
+                createViviendaDto.getTipo(),
+                createViviendaDto.getPrecio(),
+                createViviendaDto.getNumHabitaciones(),
+                createViviendaDto.getMetrosCuadrados(),
+                createViviendaDto.getNumBanyos(),
+                createViviendaDto.isTieneAscensor(),
+                createViviendaDto.isTieneGaraje(),
+                createViviendaDto.isTienePiscina(),
+                vivienda.getInmobiliaria(),
+                vivienda.getPropietario(),
+                vivienda.getListInteresa()
+        );
+    }
 }

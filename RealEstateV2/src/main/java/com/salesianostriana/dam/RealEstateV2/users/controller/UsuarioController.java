@@ -6,6 +6,7 @@ import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.UsuarioDtoConvert
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import com.salesianostriana.dam.RealEstateV2.users.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +28,8 @@ public class UsuarioController {
         if(guardado == null){
             return ResponseEntity.badRequest().build();
         }else{
-            return ResponseEntity.ok(usuarioDtoConverter.convertUsuarioToUsuarioDto(guardado));
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(usuarioDtoConverter.convertUsuarioToUsuarioDto(guardado));
         }
     }
 
@@ -38,7 +40,8 @@ public class UsuarioController {
         if(guardado == null){
             return ResponseEntity.badRequest().build();
         }else{
-            return ResponseEntity.ok(usuarioDtoConverter.convertUsuarioToUsuarioDto(guardado));
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(usuarioDtoConverter.convertUsuarioToUsuarioDto(guardado));
         }
     }
 
@@ -49,7 +52,8 @@ public class UsuarioController {
         if(guardado == null){
             return ResponseEntity.badRequest().build();
         }else{
-            return ResponseEntity.ok(usuarioDtoConverter.convertUsuarioToUsuarioDto(guardado));
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(usuarioDtoConverter.convertUsuarioToUsuarioDto(guardado));
         }
     }
 
