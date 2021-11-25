@@ -126,4 +126,17 @@ public class InmobiliariaController {
             );
         }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<GetInmobiliariaDto> buscarInmobiliaria(@PathVariable UUID id){
+
+        Optional<Inmobiliaria> inmobiliaria = inmobiliariaService.findById(id);
+
+        if(inmobiliaria.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok(inmobiliariaDtoConverter
+                    .convertInmobiliariaToGetInmobiliariaDto(inmobiliaria.get()));
+        }
+    }
 }
