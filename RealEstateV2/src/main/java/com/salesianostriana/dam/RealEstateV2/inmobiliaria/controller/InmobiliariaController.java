@@ -139,4 +139,21 @@ public class InmobiliariaController {
                     .convertInmobiliariaToGetInmobiliariaDto(inmobiliaria.get()));
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminarInmobiliaria(@PathVariable UUID id){
+
+        Optional<Inmobiliaria> inmobiliaria = inmobiliariaService.findById(id);
+
+        if(inmobiliaria.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            inmobiliaria.get()
+                    .getListaViviendas()
+                            .forEach(vivienda -> vivienda
+                                    .removeFromInmobiliaria(inmobiliaria.get()));
+            inmobiliariaService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+    }
 }
