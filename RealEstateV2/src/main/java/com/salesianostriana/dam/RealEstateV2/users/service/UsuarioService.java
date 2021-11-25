@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service("userDetailsService")
@@ -86,10 +87,23 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
     }
 
     public Usuario findPropietarioById(UUID id) {
-        if(repositorio.findById(id).isEmpty()){
+        Optional<Usuario> usuario = findById(id);
+
+        if(usuario.isEmpty()){
             return null;
-        }else if (repositorio.findById(id).get().getRol().equals(UserRole.PROPIETARIO)){
-            return repositorio.findById(id).get();
+        }else if (usuario.get().getRol().equals(UserRole.PROPIETARIO)){
+            return usuario.get();
+        }
+        return null;
+    }
+
+    public Usuario findGestorById(UUID id){
+        Optional<Usuario> usuario = findById(id);
+
+        if(usuario.isEmpty()){
+            return null;
+        }else if(usuario.get().getRol().equals(UserRole.GESTOR)){
+            return usuario.get();
         }
         return null;
     }
