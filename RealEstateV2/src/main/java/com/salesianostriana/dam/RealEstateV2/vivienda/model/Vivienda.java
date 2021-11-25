@@ -73,7 +73,7 @@ public class Vivienda implements Serializable {
     private Usuario propietario;
 
     @Builder.Default
-    @OneToMany(mappedBy = "vivienda")
+    @OneToMany(mappedBy = "vivienda",cascade = CascadeType.REMOVE)
     private List<Interesa> listInteresa = new ArrayList<>();
 
 
