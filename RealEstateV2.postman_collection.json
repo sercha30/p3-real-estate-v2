@@ -68,7 +68,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"sergio@admin.com\",\r\n    \"password\": \"admin\"\r\n}",
+							"raw": "{\r\n    \"email\": \"concha@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -303,7 +303,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhOWZlMGY1OC03ZDUzLTFlYjItODE3ZC01M2VmNTM1MzAwMDAiLCJpYXQiOjE2Mzc4NzcxMzUsIm5vbWJyZSI6IkNvbmNoYSIsImFwZWxsaWRvcyI6Ik1hcmluYSBSb3RhIiwicm9sIjoiUFJPUElFVEFSSU8ifQ.W5rXsk5ox302JK_Dk5HbJ7q96ZNa-pdyzOk_LhDIwsQ",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -341,7 +341,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhOWZlMGY1OC03ZDUzLTFmOTEtODE3ZC01MzhmYjcwNjAwMDAiLCJpYXQiOjE2Mzc4NzA4NjksIm5vbWJyZSI6IkNvbmNoYSIsImFwZWxsaWRvcyI6Ik1hcmluYSBSb3RhIiwicm9sIjoiUFJPUElFVEFSSU8ifQ.s3zYCqiySGVsm9rp5ctb7-ohda9NPlxbs6zX-m6AfPE",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -349,7 +349,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/vivienda/?tipo=alquiler&codigoPostal=41980",
+							"raw": "localhost:8080/vivienda/",
 							"host": [
 								"localhost"
 							],
@@ -357,16 +357,6 @@
 							"path": [
 								"vivienda",
 								""
-							],
-							"query": [
-								{
-									"key": "tipo",
-									"value": "alquiler"
-								},
-								{
-									"key": "codigoPostal",
-									"value": "41980"
-								}
 							]
 						}
 					},
@@ -380,7 +370,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhOWZlMGY1OC03ZDUzLTFjMzAtODE3ZC01MzljZTUyZjAwMDAiLCJpYXQiOjE2Mzc4NzE3MzQsIm5vbWJyZSI6IkNvbmNoYSIsImFwZWxsaWRvcyI6Ik1hcmluYSBSb3RhIiwicm9sIjoiUFJPUElFVEFSSU8ifQ.PyTsrO92uzC5gLm9PBlIhCC7ZS1dhJLtNO0qB-stIUA",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -388,14 +378,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/vivienda/a9fe0f58-7d53-1c30-817d-539d31740001",
+							"raw": "localhost:8080/vivienda/a9fe0f58-7d58-153f-817d-58c6c4510003",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"vivienda",
-								"a9fe0f58-7d53-1c30-817d-539d31740001"
+								"a9fe0f58-7d58-153f-817d-58c6c4510003"
 							]
 						}
 					},
@@ -467,6 +457,110 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Añadir gestión de inmobiliaria a vivienda",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/vivienda/a9fe0f58-7d58-153f-817d-58c6c4510003/inmobiliaria/a9fe0f58-7d58-153f-817d-58c56e960000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"a9fe0f58-7d58-153f-817d-58c6c4510003",
+								"inmobiliaria",
+								"a9fe0f58-7d58-153f-817d-58c56e960000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar gestión de inmobiliaria sobre vivienda",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/vivienda/a9fe0f58-7d57-17fb-817d-57f934420001/inmobiliaria/a9fe0f58-7d57-17fb-817d-57f98da90002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"a9fe0f58-7d57-17fb-817d-57f934420001",
+								"inmobiliaria",
+								"a9fe0f58-7d57-17fb-817d-57f98da90002"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Añadir interes a vivienda",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mensaje\":\"Una casa bien refacherita\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/vivienda/a9fe0f58-7d59-14e0-817d-597545db0001/meinteresa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"a9fe0f58-7d59-14e0-817d-597545db0001",
+								"meinteresa"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -497,6 +591,137 @@
 								}
 							}
 						},
+						"url": {
+							"raw": "localhost:8080/inmobiliaria/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inmobiliaria",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Añadir nuevo gestor a inmobiliaria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Gerardo\",\r\n    \"apellidos\": \"Marín Marismeño\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"gerardo@gmail.com\",\r\n    \"telefono\":\"610235678\",\r\n    \"direccion\":\"Calle MegaFake, 1\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/inmobiliaria/a9fe0f58-7d58-198d-817d-58da27b10000/gestor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inmobiliaria",
+								"a9fe0f58-7d58-198d-817d-58da27b10000",
+								"gestor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar gestor de inmobiliaria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/inmobiliaria/gestor/a9fe0f58-7d58-153f-817d-58c5b96c0001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inmobiliaria",
+								"gestor",
+								"a9fe0f58-7d58-153f-817d-58c5b96c0001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar gestores",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/inmobiliaria/a9fe0f58-7d58-198d-817d-58da27b10000/gestor/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inmobiliaria",
+								"a9fe0f58-7d58-198d-817d-58da27b10000",
+								"gestor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar inmobiliarias",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "localhost:8080/inmobiliaria/",
 							"host": [
