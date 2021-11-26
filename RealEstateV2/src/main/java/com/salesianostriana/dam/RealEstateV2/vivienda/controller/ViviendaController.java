@@ -162,7 +162,7 @@ public class ViviendaController {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
-    @PostMapping("/vivienda/{id}/inmobiliaria/{id2}")
+    @PostMapping("/{id}/inmobiliaria/{id2}")
     public ResponseEntity<GetViviendaDto> establecerGestionInmobiliaria(@PathVariable UUID id,
                                                                         @PathVariable UUID id2,
                                                                         @AuthenticationPrincipal Usuario usuario) {
@@ -184,7 +184,7 @@ public class ViviendaController {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
-    @DeleteMapping("/vivienda/{id}/inmobiliaria/{id2}")
+    @DeleteMapping("/{id}/inmobiliaria/{id2}")
     public ResponseEntity<GetViviendaDto> eliminarGestionInmobiliaria(@PathVariable UUID id,
                                                                         @PathVariable UUID id2,
                                                                         @AuthenticationPrincipal Usuario usuario) {
