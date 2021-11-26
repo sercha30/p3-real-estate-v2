@@ -17,18 +17,18 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
     Optional<List<Usuario>> findAllByRol(UserRole rol);
 
     @Query(value = """
-            select distinct u
-            from Usuario u
-            where u.id in(select interesado.id
-                            from Interesa i)
+            SELECT distinct u
+            FROM Usuario u
+            WHERE u.id in(SELECT interesado.id
+                            FROM Interesa i)
             """
     )
     Optional<List<Usuario>> findAllInteresados();
 
     @Query(value = """
-            select u
-            from Usuario u
-            where u.id = :interesado_id
+            SELECT u
+            FROM Usuario u
+            WHERE u.id = :interesado_id
             """)
     Optional<Usuario> findInteresado(@Param("interesado_id") UUID id);
 }

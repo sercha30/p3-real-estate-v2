@@ -10,10 +10,7 @@ import com.salesianostriana.dam.RealEstateV2.users.dto.interesa.InteresaDtoConve
 import com.salesianostriana.dam.RealEstateV2.users.model.UserRole;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import com.salesianostriana.dam.RealEstateV2.users.service.InteresaService;
-import com.salesianostriana.dam.RealEstateV2.vivienda.dto.CreateViviendaDto;
-import com.salesianostriana.dam.RealEstateV2.vivienda.dto.GetViviendaDto;
-import com.salesianostriana.dam.RealEstateV2.vivienda.dto.ViviendaDtoConverter;
-import com.salesianostriana.dam.RealEstateV2.vivienda.dto.ViviendaListaDtoConverter;
+import com.salesianostriana.dam.RealEstateV2.vivienda.dto.*;
 import com.salesianostriana.dam.RealEstateV2.vivienda.model.Vivienda;
 import com.salesianostriana.dam.RealEstateV2.vivienda.service.ViviendaService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -243,5 +241,20 @@ public class ViviendaController {
     }
     */
 
+    @GetMapping("/top")
+    public ResponseEntity<List<GetViviendaListaDto>> top10Viviendas(){
+
+        List<Vivienda> viviendas = viviendaService.top10ViviendasConMasInteres();
+
+        if(viviendas.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }else{
+            return ResponseEntity.ok(
+                    viviendas.stream()
+                            .map(viviendaListaDtoConverter::convertViviendaToGetViviendaListaDto)
+                            .collect(Collectors.toList())
+            );
+        }
+    }
 
 }
