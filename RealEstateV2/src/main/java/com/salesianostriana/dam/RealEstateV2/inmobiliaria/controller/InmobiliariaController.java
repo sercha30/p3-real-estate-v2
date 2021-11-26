@@ -11,6 +11,11 @@ import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.UsuarioDtoConvert
 import com.salesianostriana.dam.RealEstateV2.users.model.UserRole;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import com.salesianostriana.dam.RealEstateV2.users.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +37,17 @@ public class InmobiliariaController {
     private final InmobiliariaDtoConverter inmobiliariaDtoConverter;
     private final UsuarioDtoConverter usuarioDtoConverter;
 
+    @Operation(summary = "Crea una nueva inmobiliaria")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Se ha creado la inmobiliaria correctamente",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))}),
+            @ApiResponse(responseCode = "400",
+                    description = "La inmobiliaria no se ha creado correctamente",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))})
+    })
     @PostMapping("/")
     public ResponseEntity<GetInmobiliariaDto> addNuevaInmobiliaria(
             @RequestBody CreateInmobiliariaDto nuevaInmobiliaria){
@@ -46,6 +62,21 @@ public class InmobiliariaController {
         }
     }
 
+    @Operation(summary = "Crea un usuario gestor y lo añade a la inmobiliaria especificada")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Se ha creado el gestor y se ha añadido correctamente",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "La inmobiliaria no se ha encontrado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))}),
+            @ApiResponse(responseCode = "403",
+                    description = "Acceso denegado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))})
+    })
     @PostMapping("/{id}/gestor")
     public ResponseEntity<GetInmobiliariaDto> addGestor(@PathVariable UUID id,
                                                         @RequestBody CreateGestorDto nuevoGestor,
@@ -68,6 +99,21 @@ public class InmobiliariaController {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
+    @Operation(summary = "Elimina un gestor de la inmobiliaria especificada")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "400",
+                    description = "Se ha eliminado al gestor correctamente",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "El gestor no se ha encontrado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))}),
+            @ApiResponse(responseCode = "403",
+                    description = "Acceso denegado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))})
+    })
     @DeleteMapping("/gestor/{id}")
     public ResponseEntity<?> eliminarGestor(@PathVariable UUID id,
                                             @AuthenticationPrincipal Usuario usuario){
@@ -89,6 +135,21 @@ public class InmobiliariaController {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
+    @Operation(summary = "Muestra una lista de gestores de la inmobiliaria")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se muestran los gestores correctamente",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "La inmobiliaria no se ha encontrado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))}),
+            @ApiResponse(responseCode = "403",
+                    description = "Acceso denegado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))})
+    })
     @GetMapping("/{id}/gestor/")
     public ResponseEntity<List<GetUsuarioDto>> listarGestores(@PathVariable UUID id,
                                                               @AuthenticationPrincipal Usuario usuario){
@@ -111,6 +172,21 @@ public class InmobiliariaController {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
+    @Operation(summary = "Muestra una lista de las inmobiliaria")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se muestran las inmobiliarias correctamente",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))}),
+            @ApiResponse(responseCode = "204",
+                    description = "La lista de inmobiliarias está vacía",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))}),
+            @ApiResponse(responseCode = "403",
+                    description = "Acceso denegado",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))})
+    })
     @GetMapping("/")
     public ResponseEntity<List<GetInmobiliariaDto>> listarInmobiliarias(){
 
