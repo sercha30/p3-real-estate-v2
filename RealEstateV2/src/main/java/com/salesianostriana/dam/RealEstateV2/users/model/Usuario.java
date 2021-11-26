@@ -17,11 +17,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-@NamedEntityGraph(
-        name = "grafoPropietarioVivienda",
-        attributeNodes = {
-                @NamedAttributeNode("viviendas")
-        }
+@NamedEntityGraphs(
+        @NamedEntityGraph(name = "grafoPropietarioVivienda",
+                attributeNodes = {
+                        @NamedAttributeNode("viviendas")
+                })
 )
 @Entity
 @Getter @Setter

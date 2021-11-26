@@ -42,6 +42,7 @@ public class ViviendaController {
     private final ViviendaDtoConverter viviendaDtoConverter;
     private final ViviendaListaDtoConverter viviendaListaDtoConverter;
     private final InteresaDtoConverter interesaDtoConverter;
+
     private final PaginationUtilsLinks paginationUtilsLinks;
 
     @PostMapping("/")
@@ -241,5 +242,6 @@ public class ViviendaController {
 
     }
     */
+
 
 }
