@@ -9,6 +9,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@NamedEntityGraph(
+        name = "grafoInteresaInteresado",
+        attributeNodes = {
+                @NamedAttributeNode("interesado")
+        }
+)
 @Entity
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter

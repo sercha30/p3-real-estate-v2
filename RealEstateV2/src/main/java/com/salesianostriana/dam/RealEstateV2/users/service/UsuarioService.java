@@ -110,4 +110,14 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
         return null;
     }
 
+    public List<Usuario> buscarInteresados(){
+        Optional<List<Usuario>> interesados = repositorio.findAllInteresados();
+
+        if(interesados.isEmpty()){
+            return null;
+        }else{
+            return interesados.get();
+        }
+    }
+
 }
