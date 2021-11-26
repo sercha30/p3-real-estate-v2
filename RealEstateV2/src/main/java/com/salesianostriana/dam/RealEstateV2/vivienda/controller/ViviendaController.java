@@ -225,7 +225,6 @@ public class ViviendaController {
         }
     }
 
-    /*
     @DeleteMapping("/{id}/meinteresa/")
     public ResponseEntity<?> eliminarInteres(@PathVariable UUID id,
                                              @AuthenticationPrincipal Usuario usuario){
@@ -235,11 +234,12 @@ public class ViviendaController {
         if(vivienda.isEmpty()){
             return ResponseEntity.notFound().build();
         }else if(usuario.getRol().equals(UserRole.ADMIN)){
-
+            vivienda.get().getListInteresa().clear();
+            return ResponseEntity.noContent().build();
         }
 
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
-    */
 
     @GetMapping("/top")
     public ResponseEntity<List<GetViviendaListaDto>> top10Viviendas(){
