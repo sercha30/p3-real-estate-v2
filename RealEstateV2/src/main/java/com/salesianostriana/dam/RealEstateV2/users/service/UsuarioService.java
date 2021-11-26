@@ -1,5 +1,8 @@
 package com.salesianostriana.dam.RealEstateV2.users.service;
 
+import com.salesianostriana.dam.RealEstateV2.inmobiliaria.model.Inmobiliaria;
+import com.salesianostriana.dam.RealEstateV2.inmobiliaria.service.InmobiliariaService;
+import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.CreateGestorDto;
 import com.salesianostriana.dam.RealEstateV2.users.dto.usuario.CreateUsuarioDto;
 import com.salesianostriana.dam.RealEstateV2.users.model.UserRole;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
@@ -21,6 +24,7 @@ import java.util.UUID;
 public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository> implements UserDetailsService {
 
     private final PasswordEncoder passwordEncoder;
+    private final InmobiliariaService inmobiliariaService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -46,8 +50,10 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
         }
     }
 
-    public Usuario saveGestor(CreateUsuarioDto nuevoGestor) {
-        if(nuevoGestor.getPassword().contentEquals(nuevoGestor.getPassword2())){
+    public Usuario saveGestor(CreateGestorDto nuevoGestor) {
+        Optional<Inmobiliaria> inmobiliaria = inmobiliariaService.findById(nuevoGestor.getInmobiliaria_id());
+
+        if(inmobiliaria.isPresent() && nuevoGestor.getPassword().contentEquals(nuevoGestor.getPassword2())){
             Usuario usuario = Usuario.builder()
                     .password(passwordEncoder.encode(nuevoGestor.getPassword()))
                     .apellidos(nuevoGestor.getApellidos())
@@ -57,6 +63,7 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
                     .direccion(nuevoGestor.getDireccion())
                     .telefono(nuevoGestor.getTelefono())
                     .rol(UserRole.GESTOR)
+                    .inmobiliaria(inmobiliaria.get())
                     .build();
             return save(usuario);
         }else{

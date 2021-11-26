@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "34ee7a7b-17d3-4c0c-ab6e-145badeb4acc",
+		"_postman_id": "ebecd57f-1f12-4637-a80a-592e644c6d00",
 		"name": "RealEstateV2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -10,6 +10,19 @@
 			"item": [
 				{
 					"name": "Nuevo admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"admin_id\",jsonData.admin_id);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -49,7 +62,7 @@
 					"response": []
 				},
 				{
-					"name": "Login",
+					"name": "Login propietario",
 					"event": [
 						{
 							"listen": "test",
@@ -69,6 +82,88 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"email\": \"concha@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\",jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sergio@admin.com\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login gestor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\",jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"juan@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -142,7 +237,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Juan\",\r\n    \"apellidos\": \"Del Pino Monteño\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"juan@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Juan\",\r\n    \"apellidos\": \"Del Pino Monteño\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"pepe@gmail.com\",\r\n    \"telefono\":\"697854123\",\r\n    \"direccion\":\"Calle SuperFake, 1\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\",\r\n    \"inmobiliaria_id\":\"c0a83801-7d5c-170a-817d-5c572ba00000\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -172,6 +267,18 @@
 			"item": [
 				{
 					"name": "Nuevo propietario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"propietario_id\",jsonData.propietario_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -474,7 +581,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/vivienda/a9fe0f58-7d58-153f-817d-58c6c4510003/inmobiliaria/a9fe0f58-7d58-153f-817d-58c56e960000",
+							"raw": "http://localhost:8080/vivienda/c0a83801-7d5c-16ec-817d-5c38109c0002/inmobiliaria/c0a83801-7d5c-16ec-817d-5c3730ad0000",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -482,9 +589,9 @@
 							"port": "8080",
 							"path": [
 								"vivienda",
-								"a9fe0f58-7d58-153f-817d-58c6c4510003",
+								"c0a83801-7d5c-16ec-817d-5c38109c0002",
 								"inmobiliaria",
-								"a9fe0f58-7d58-153f-817d-58c56e960000"
+								"c0a83801-7d5c-16ec-817d-5c3730ad0000"
 							]
 						}
 					},
@@ -506,7 +613,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/vivienda/a9fe0f58-7d57-17fb-817d-57f934420001/inmobiliaria/a9fe0f58-7d57-17fb-817d-57f98da90002",
+							"raw": "http://localhost:8080/vivienda/c0a83801-7d5c-16ec-817d-5c38109c0002/inmobiliaria/c0a83801-7d5c-16ec-817d-5c3730ad0000",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -514,9 +621,9 @@
 							"port": "8080",
 							"path": [
 								"vivienda",
-								"a9fe0f58-7d57-17fb-817d-57f934420001",
+								"c0a83801-7d5c-16ec-817d-5c38109c0002",
 								"inmobiliaria",
-								"a9fe0f58-7d57-17fb-817d-57f98da90002"
+								"c0a83801-7d5c-16ec-817d-5c3730ad0000"
 							]
 						}
 					},
@@ -547,7 +654,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/vivienda/a9fe0f58-7d59-14e0-817d-597545db0001/meinteresa",
+							"raw": "http://localhost:8080/vivienda/c0a83801-7d5c-135d-817d-5c2415920001/meinteresa",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -555,8 +662,59 @@
 							"port": "8080",
 							"path": [
 								"vivienda",
-								"a9fe0f58-7d59-14e0-817d-597545db0001",
+								"c0a83801-7d5c-135d-817d-5c2415920001",
 								"meinteresa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar interés de vivienda",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/vivienda/c0a83801-7d5c-135d-817d-5c2415920001/meinteresa/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"c0a83801-7d5c-135d-817d-5c2415920001",
+								"meinteresa",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Top 10 de viviendas con más interés",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vivienda/top",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"top"
 							]
 						}
 					},
@@ -622,7 +780,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Gerardo\",\r\n    \"apellidos\": \"Marín Marismeño\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"gerardo@gmail.com\",\r\n    \"telefono\":\"610235678\",\r\n    \"direccion\":\"Calle MegaFake, 1\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Gerardo\",\r\n    \"apellidos\": \"Marín Marismeño\",\r\n    \"avatar\": \"foto.png\",\r\n    \"email\": \"gerardo@gmail.com\",\r\n    \"telefono\":\"610235678\",\r\n    \"direccion\":\"Calle MegaFake, 1\",\r\n    \"password\": \"12345678\",\r\n    \"password2\": \"12345678\",\r\n    \"inmobiliaria_id\":\"a9fe0f58-7d58-198d-817d-58da27b10000\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -731,6 +889,130 @@
 							"path": [
 								"inmobiliaria",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar inmobiliaria por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/inmobiliaria/a9fe0f58-7d58-198d-817d-58da27b10000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inmobiliaria",
+								"a9fe0f58-7d58-198d-817d-58da27b10000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar inmobiliaria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/inmobiliaria/c0a83801-7d5c-18d6-817d-5c2a80c90000",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inmobiliaria",
+								"c0a83801-7d5c-18d6-817d-5c2a80c90000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Interesados",
+			"item": [
+				{
+					"name": "Listar interesados",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/interesado/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"interesado",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar interesado por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/interesado/c0a83801-7d5c-1b00-817d-5c0b2a780000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"interesado",
+								"c0a83801-7d5c-1b00-817d-5c0b2a780000"
 							]
 						}
 					},
