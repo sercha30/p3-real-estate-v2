@@ -4,6 +4,7 @@ import com.salesianostriana.dam.RealEstateV2.users.model.UserRole;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,4 +24,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
             """
     )
     Optional<List<Usuario>> findAllInteresados();
+
+    @Query(value = """
+            select u
+            from Usuario u
+            where u.id = :interesado_id
+            """)
+    Optional<Usuario> findInteresado(@Param("interesado_id") UUID id);
 }

@@ -120,4 +120,14 @@ public class UsuarioService extends BaseService<Usuario, UUID, UsuarioRepository
         }
     }
 
+    public Usuario buscarInteresadoPorID(UUID id){
+        Optional<Usuario> interesado = repositorio.findInteresado(id);
+
+        if(interesado.isEmpty()){
+            return null;
+        }else{
+            return interesado.get();
+        }
+    }
+
 }
