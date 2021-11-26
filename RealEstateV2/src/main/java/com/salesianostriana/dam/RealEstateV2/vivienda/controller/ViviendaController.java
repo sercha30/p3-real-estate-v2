@@ -226,6 +226,7 @@ public class ViviendaController {
         }
     }
 
+    /*
     @DeleteMapping("/{id}/meinteresa/")
     public ResponseEntity<?> eliminarInteres(@PathVariable UUID id,
                                              @AuthenticationPrincipal Usuario usuario){
@@ -239,5 +240,6 @@ public class ViviendaController {
         }
 
     }
+    */
 
 }
