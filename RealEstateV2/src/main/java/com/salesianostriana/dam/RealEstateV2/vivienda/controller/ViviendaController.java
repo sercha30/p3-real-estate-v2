@@ -226,4 +226,20 @@ public class ViviendaController {
         }
     }
 
+    /*
+    @DeleteMapping("/{id}/meinteresa/")
+    public ResponseEntity<?> eliminarInteres(@PathVariable UUID id,
+                                             @AuthenticationPrincipal Usuario usuario){
+
+        Optional<Vivienda> vivienda = viviendaService.findById(id);
+
+        if(vivienda.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else if(usuario.getRol().equals(UserRole.ADMIN)){
+
+        }
+
+    }
+    */
+
 }
