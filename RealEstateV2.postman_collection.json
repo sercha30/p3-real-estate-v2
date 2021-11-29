@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ebecd57f-1f12-4637-a80a-592e644c6d00",
+		"_postman_id": "b7aa5afd-039c-4af8-b61e-f84bc4e34a29",
 		"name": "RealEstateV2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -719,6 +719,64 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Listar viviendas de propietario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vivienda/propietario",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"propietario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar viviendas con intereses asociados a usuario logueado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vivienda/interesado",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"interesado"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1024,6 +1082,10 @@
 	"variable": [
 		{
 			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "propietario_id",
 			"value": ""
 		}
 	]

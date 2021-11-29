@@ -6,18 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.util.UUID;
-
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @SuperBuilder
-public class GetViviendaListaDto {
+public class GetViviendaConInteresDto extends GetViviendaListaDto{
 
-    private UUID id;
-    private String titulo;
-    private String avatar;
-    private String tipo;
-    private Double precio;
-    private String nombre_propietario;
-    private String avatar_propietario;
+    private Boolean interesa;
 }
