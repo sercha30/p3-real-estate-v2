@@ -169,4 +169,12 @@ public class ViviendaService extends BaseService<Vivienda, UUID, ViviendaReposit
         return repositorio.viviendasMasInteresantes();
     }
 
+    public Optional<List<Vivienda>> viviendasPropietario(Usuario usuario){
+        return repositorio.viviendasPropietario(usuario.getId());
+    }
+
+    public Optional<List<Vivienda>> viviendasConInteres(Usuario usuario){
+        return repositorio.viviendasConInteres(usuario.getId());
+    }
+
 }

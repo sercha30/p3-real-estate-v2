@@ -39,6 +39,7 @@ public class ViviendaController {
     private final InteresaService interesaService;
     private final ViviendaDtoConverter viviendaDtoConverter;
     private final ViviendaListaDtoConverter viviendaListaDtoConverter;
+    private final ViviendaConInteresDtoConverter viviendaConInteresDtoConverter;
     private final InteresaDtoConverter interesaDtoConverter;
 
     private final PaginationUtilsLinks paginationUtilsLinks;
@@ -252,6 +253,36 @@ public class ViviendaController {
             return ResponseEntity.ok(
                     viviendas.stream()
                             .map(viviendaListaDtoConverter::convertViviendaToGetViviendaListaDto)
+                            .collect(Collectors.toList())
+            );
+        }
+    }
+
+    @GetMapping("/propietario")
+    public ResponseEntity<List<GetViviendaListaDto>> listarViviendasPropietario(@AuthenticationPrincipal Usuario usuario){
+        Optional<List<Vivienda>> viviendas = viviendaService.viviendasPropietario(usuario);
+
+        if(viviendas.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }else{
+            return ResponseEntity.ok(
+                    viviendas.get().stream()
+                            .map(viviendaListaDtoConverter::convertViviendaToGetViviendaListaDto)
+                            .collect(Collectors.toList())
+            );
+        }
+    }
+
+    @GetMapping("/interesado")
+    public ResponseEntity<List<GetViviendaConInteresDto>> listarViviendasConInteres(@AuthenticationPrincipal Usuario usuario){
+        Optional<List<Vivienda>> viviendas = viviendaService.viviendasConInteres(usuario);
+
+        if(viviendas.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }else{
+            return ResponseEntity.ok(
+                    viviendas.get().stream()
+                            .map(viviendaConInteresDtoConverter::convertViviendaToGetViviendaConInteresDto)
                             .collect(Collectors.toList())
             );
         }
