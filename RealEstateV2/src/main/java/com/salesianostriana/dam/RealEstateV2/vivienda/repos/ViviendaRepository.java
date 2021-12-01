@@ -38,6 +38,7 @@ public interface ViviendaRepository extends JpaRepository<Vivienda, UUID>, JpaSp
                     SELECT COUNT(*)
                     FROM Interesa i
                     WHERE i.vivienda.id = v.id AND i.usuario.id = :usuario_id))
+                FROM Vivienda v
             """)
     Optional<List<Vivienda>> viviendasConInteres(@Param("usuario_id") UUID usuario_id);
 }
