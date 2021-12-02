@@ -11,6 +11,7 @@ import com.salesianostriana.dam.RealEstateV2.users.model.UserRole;
 import com.salesianostriana.dam.RealEstateV2.users.model.Usuario;
 import com.salesianostriana.dam.RealEstateV2.users.service.InteresaService;
 import com.salesianostriana.dam.RealEstateV2.vivienda.dto.*;
+import com.salesianostriana.dam.RealEstateV2.vivienda.error.ViviendaNotFoundException;
 import com.salesianostriana.dam.RealEstateV2.vivienda.model.Vivienda;
 import com.salesianostriana.dam.RealEstateV2.vivienda.service.ViviendaService;
 import lombok.RequiredArgsConstructor;
@@ -87,16 +88,12 @@ public class ViviendaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetViviendaDto> buscarVivienda(@PathVariable UUID id){
-        Optional<Vivienda> vivienda = viviendaService.findById(id);
+    public GetViviendaDto buscarVivienda(@PathVariable UUID id){
+        return viviendaDtoConverter.convertViviendaToViviendaDto(
+                viviendaService.findById(id)
+                        .orElseThrow(() -> new ViviendaNotFoundException("No se puede encontrar el producto con la ID: " + id))
+        );
 
-        if(vivienda.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }else{
-            return ResponseEntity
-                    .ok()
-                    .body(viviendaDtoConverter.convertViviendaToViviendaDto(vivienda.get()));
-        }
     }
 
     @PutMapping("/{id}")
@@ -184,6 +181,7 @@ public class ViviendaController {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
+    //@PostAuthorize() // Utilizar la expresión SpEL adecuada
     @DeleteMapping("/{id}/inmobiliaria/{id2}")
     public ResponseEntity<GetViviendaDto> eliminarGestionInmobiliaria(@PathVariable UUID id,
                                                                         @PathVariable UUID id2,
